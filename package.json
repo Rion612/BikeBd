@@ -1,0 +1,32 @@
+{
+  "name": "bdbikes",
+  "version": "1.0.0",
+  "description": "BD Bikes",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "server-install": "npm install --prefix server",
+    "admin-install": "npm install --prefix admin",
+    "start": "concurrently \"npm start --prefix server\" \"npm start --prefix client\"  \"npm start --prefix admin\""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "React",
+    "MongoDB"
+  ],
+  "author": "Xack & Rion",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xack20"
+  },
+  "homepage": "https://github.com/xack20",
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "nodemon": "^2.0.7"
+  }
+}
