@@ -28,7 +28,7 @@ function Home(props) {
                 </Breadcrumb>
                 <div className="site-layout-content">Content</div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            <Footer style={{ textAlign: 'center' }}>BongoBike @2021 Created By Xack and Rion</Footer>
         </Layout>
     );
 }
