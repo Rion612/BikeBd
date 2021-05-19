@@ -7,7 +7,7 @@ const { Header, Content, Footer } = Layout;
 function Home(props) {
     return (
         <Layout className="layout">
-            <Header style={{backgroundColor : 'white'}}>
+            <Header style={{ backgroundColor: 'white', position: 'sticky',top : '0px', zIndex: 1, width: '100%'}}>
                 <div className="logo" />
                 <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
                     <Menu.Item key="1">Home</Menu.Item>
