@@ -37,5 +37,5 @@ const indexRoute = require('./Route/index');
 app.use("/api",indexRoute);
 
 app.listen(process.env.PORT,()=>{
-    console.log("Server run successfully")
+    console.log(`Server is running successfully on port ${process.env.PORT}`);
 })
