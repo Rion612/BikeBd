@@ -34,9 +34,12 @@ app.use(
   );
 const indexRoute = require('./Route/index');
 const showroomRoute = require('./Route/showroom');
+const bikeRoute = require('./Route/bike');
 
 app.use("/api",indexRoute);
 app.use("/api",showroomRoute);
+app.use("/api",bikeRoute);
+
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server is running successfully on port ${process.env.PORT}`);
