@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { HiClipboardList } from 'react-icons/hi';
-import { AiOutlineDashboard } from "react-icons/ai";
+import { AiOutlineDashboard,AiOutlineShop } from "react-icons/ai";
 import { RiMotorbikeFill } from "react-icons/ri";
 import { SiBrandfolder } from 'react-icons/si';
 export const sidebarData = [
@@ -12,7 +12,7 @@ export const sidebarData = [
         cName :'nav-text'
     },
     {
-        title :'bike',
+        title :'Bikes',
         path :'/bike',
         icon :<RiMotorbikeFill/>,
         cName :'nav-text'
@@ -27,6 +27,13 @@ export const sidebarData = [
         title :'Bikes brand',
         path :'/bike/brand',
         icon :<SiBrandfolder/>,
+        cName :'nav-text'
+    },
+    
+    {
+        title :'Showrooms',
+        path :'/bike/showrooms',
+        icon :<AiOutlineShop/>,
         cName :'nav-text'
     }
 
