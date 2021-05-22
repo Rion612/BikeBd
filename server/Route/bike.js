@@ -3,6 +3,8 @@ const { createBikeCategory, getBikeCategory } = require('../Controller/bikeCateg
 const multer = require('multer');
 const shortid =require('shortid');
 const path =require('path');
+const { createBike } = require('../Controller/bike');
+const { createBikeBrand,getBikeBrand } = require('../Controller/bikeBrand');
 
 
 
@@ -21,10 +23,14 @@ const storage = multer.diskStorage({
    
   const upload = multer({ storage })
 
-
+  router.post('/create/bike/brand',upload.single('brandImage'),createBikeBrand);
+  router.get('/get/bike/brands',getBikeBrand);
 
 router.post('/create/bike/category',upload.single('categoryImage'),createBikeCategory);
 router.get('/get/bike/categories',getBikeCategory);
+
+router.post('/create/bike',upload.array('bikeImages'),createBike);
+router.get('/get/all/bikes');
 
 
 
