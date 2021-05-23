@@ -3,7 +3,7 @@ import React from 'react';
 const Brand = () => {
     return (
         <div className="brand">
-            Brands
+            <div className="title"><h3>Bike brands</h3></div>
         </div>
     );
 };

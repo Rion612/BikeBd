@@ -1,0 +1,15 @@
+.b{
+    display: flex;
+    height: 70px;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 50px;
+}
+
+.content{
+    display: block;
+    padding: 10px 50px 10px 50px;
+}
+.category{
+    margin-top: 80px;
+}

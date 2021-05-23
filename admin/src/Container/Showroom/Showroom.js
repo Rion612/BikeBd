@@ -3,7 +3,7 @@ import React from 'react'
 function Showroom() {
     return (
         <div>
-            Showroom
+            <div className="title"><h3>Bike Showrooms</h3></div>           
         </div>
     )
 }
