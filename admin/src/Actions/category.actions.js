@@ -1,6 +1,6 @@
 
 import axios from "../helpers/axios";
-import { addCategoryConstants, categoryConstants } from "./constants"
+import {  categoryConstants } from "./constants"
 
 export const getCategory = ()=>{
     return async (dispatch) => {
@@ -35,33 +35,27 @@ export const getCategory = ()=>{
 
     }
 }
-/*
+
 export const createCategory=(form)=>{
     return async dispatch =>{
-        dispatch({type:addCategoryConstants.ADD_CATEGORY_REQUEST});
+        dispatch({type: categoryConstants.ADD_CATEGORY_REQUEST});
 
-        const token = localStorage.getItem('token');
-
-        const res = await axios.post('/createcategory',form,{
-            headers: {
-                'Authorization': `Bearer ${token}` 
-              }
-        });
+        const res = await axios.post('/create/bike/category',form);
         if(res.status === 201){
             dispatch({
-                type:addCategoryConstants.ADD_CATEGORY_SUCCESS,
+                type:categoryConstants.ADD_CATEGORY_SUCCESS,
                 payload:{
-                    Category:res.data.category
+                    Category:res.data.bikeCategory
                 }
             })
         }
         else{
             dispatch({
-                type:addCategoryConstants.ADD_CATEGORY_FAILURE,
+                type:categoryConstants.GET_CATEGORY_FAILURE,
                 payload:{
                     message:"Something wrong"
                 }
             })
         }
     }
-}*/
+}

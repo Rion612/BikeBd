@@ -1,4 +1,4 @@
-import { addCategoryConstants, categoryConstants } from "../Actions/constants"
+import { categoryConstants } from "../Actions/constants"
 
 const initial_state = {
     loading: false,
@@ -6,7 +6,19 @@ const initial_state = {
     error: null
 
 }
-export default (state=initial_state, action) => {
+const buildNewCategories = (categories, category) => {
+    return [
+        ...categories,
+        {
+            _id: category._id,
+            name: category.name,
+            slug: category.slug,
+            categoryImage: category.categoryImage
+        }
+    ];
+
+}
+export default (state = initial_state, action) => {
     switch (action.type) {
         case categoryConstants.GET_CATEGORY_REQUEST:
             state = {
@@ -28,30 +40,29 @@ export default (state=initial_state, action) => {
                 message: action.payload.message
             }
             break;
-            /*
-        case addCategoryConstants.ADD_CATEGORY_REQUEST:
+        case categoryConstants.ADD_CATEGORY_REQUEST:
             state = {
                 ...state,
-                loading:true
+                loading: true
             }
             break;
-        case addCategoryConstants.ADD_CATEGORY_SUCCESS:
+        case categoryConstants.ADD_CATEGORY_SUCCESS:
             const cate = action.payload.Category;
-            const updateCategories = buildNewCategories(cate.parentId,state.categories,cate);
+            const updateCategories = buildNewCategories(state.categories, cate);
             state = {
                 ...state,
-                categories:updateCategories,
+                categories: updateCategories,
                 loading: false
 
             }
             break;
-        case addCategoryConstants.ADD_CATEGORY_FAILURE:
+        case categoryConstants.ADD_CATEGORY_FAILURE:
             state = {
-                ...initial_state,
+                ...state,
                 message: action.payload.message
 
             }
-            break;*/
+            break;
 
     }
     return state;
