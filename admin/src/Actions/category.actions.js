@@ -59,3 +59,27 @@ export const createCategory=(form)=>{
         }
     }
 }
+export const deleteCategory=(item)=>{
+    return async dispatch =>{
+        dispatch({type: categoryConstants.DEL_CATEGORY_REQUEST});
+
+        const res = await axios.post('/delete/bike/category',item);
+        if(res.status === 200){
+            dispatch({
+                type:categoryConstants.DEL_CATEGORY_SUCCESS,
+                payload:{
+                    message:res.data.message,
+                    id : item._id
+                }
+            })
+        }
+        else{
+            dispatch({
+                type:categoryConstants.DEL_CATEGORY_FAILURE,
+                payload:{
+                    message:"Something wrong"
+                }
+            })
+        }
+    }
+}

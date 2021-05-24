@@ -1,5 +1,5 @@
 const express = require('express');
-const { createBikeCategory, getBikeCategory } = require('../Controller/bikeCategory');
+const { createBikeCategory, getBikeCategory, deleteCategory } = require('../Controller/bikeCategory');
 const multer = require('multer');
 const shortid =require('shortid');
 const path =require('path');
@@ -27,6 +27,7 @@ const storage = multer.diskStorage({
   router.get('/get/bike/brands',getBikeBrand);
 
 router.post('/create/bike/category',upload.single('categoryImage'),createBikeCategory);
+router.post('/delete/bike/category',deleteCategory);
 router.get('/get/bike/categories',getBikeCategory);
 
 router.post('/create/bike',upload.array('bikeImages'),createBike);

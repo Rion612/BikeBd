@@ -18,6 +18,11 @@ const buildNewCategories = (categories, category) => {
     ];
 
 }
+const buildNewCategories2 = (categories,id) => {
+    const c = categories.filter(x => x._id != id)
+    return c;
+
+}
 export default (state = initial_state, action) => {
     switch (action.type) {
         case categoryConstants.GET_CATEGORY_REQUEST:
@@ -57,6 +62,29 @@ export default (state = initial_state, action) => {
             }
             break;
         case categoryConstants.ADD_CATEGORY_FAILURE:
+            state = {
+                ...state,
+                message: action.payload.message
+
+            }
+            break;
+            case categoryConstants.DEL_CATEGORY_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case categoryConstants.DEL_CATEGORY_SUCCESS:
+            const id = action.payload.id;
+            const updateCategories2 = buildNewCategories2(state.categories,id);
+            state = {
+                ...state,
+                categories: updateCategories2,
+                loading: false
+
+            }
+            break;
+        case categoryConstants.DEL_CATEGORY_FAILURE:
             state = {
                 ...state,
                 message: action.payload.message
