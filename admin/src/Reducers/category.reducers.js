@@ -19,7 +19,19 @@ const buildNewCategories = (categories, category) => {
 
 }
 const buildNewCategories2 = (categories,id) => {
-    const c = categories.filter(x => x._id != id)
+    const c = categories.filter(x => x._id !== id);
+    return c;
+
+}
+
+const buildNewCategories3 = (categories,cate) => {
+    const c = categories.filter(x => x._id !== cate._id);
+    c.push({
+        _id: cate._id,
+        name: cate.name,
+        slug: cate.slug,
+        categoryImage: cate.categoryImage 
+    })
     return c;
 
 }
@@ -68,7 +80,7 @@ export default (state = initial_state, action) => {
 
             }
             break;
-            case categoryConstants.DEL_CATEGORY_REQUEST:
+        case categoryConstants.DEL_CATEGORY_REQUEST:
             state = {
                 ...state,
                 loading: true
@@ -91,6 +103,29 @@ export default (state = initial_state, action) => {
 
             }
             break;
+            case categoryConstants.EDIT_CATEGORY_REQUEST:
+                state = {
+                    ...state,
+                    loading: true
+                }
+                break;
+            case categoryConstants.EDIT_CATEGORY_SUCCESS:
+                const bikeCategory = action.payload.Category;
+                const updateCategories3 = buildNewCategories3(state.categories,bikeCategory);
+                state = {
+                    ...state,
+                    categories: updateCategories3,
+                    loading: false
+    
+                }
+                break;
+            case categoryConstants.EDIT_CATEGORY_FAILURE:
+                state = {
+                    ...state,
+                    message: action.payload.message
+    
+                }
+                break;
 
     }
     return state;

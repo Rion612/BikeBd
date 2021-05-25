@@ -53,8 +53,49 @@ exports.deleteCategory = (req, res) => {
             else if (bikeCategory) {
 
                 return res.status(200).json(
-                    { message : "Item is deleted successfully" }
+                    { message: "Item is deleted successfully" }
                 );
+            }
+
+        })
+}
+
+exports.editCategory = (req, res) => {
+    const updateObj = {};
+    if (req.body.name) {
+        updateObj.name = req.body.name;
+    }
+    if (req.file) {
+        updateObj.categoryImage = process.env.API_URL + 'public/' + req.file.filename;
+    }
+
+    BikeCategory.findOneAndUpdate({ _id: req.body._id }, {
+        "$set": updateObj,
+        "$currentDate": { lastModified: true }
+    })
+        .exec((error, result) => {
+            if (result) {
+                BikeCategory.findOne({ _id: result._id })
+                    .exec((error, bikeCategory) => {
+                        if (error) {
+                            return res.status(400).json({
+                                message: "Something Wrong"
+                            });
+                        }
+                        else if (bikeCategory) {
+
+                            return res.status(200).json(
+                                { bikeCategory }
+                            );
+                        }
+
+                    })
+            }
+            else {
+                return res.status(400).json({
+                    error
+                });
+
             }
 
         })

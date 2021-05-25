@@ -83,3 +83,26 @@ export const deleteCategory=(item)=>{
         }
     }
 }
+export const editCategory=(form)=>{
+    return async dispatch =>{
+        dispatch({type: categoryConstants.EDIT_CATEGORY_REQUEST});
+
+        const res = await axios.post('/edit/bike/category',form);
+        if(res.status === 200){
+            dispatch({
+                type:categoryConstants.EDIT_CATEGORY_SUCCESS,
+                payload:{
+                    Category:res.data.bikeCategory,
+                }
+            })
+        }
+        else{
+            dispatch({
+                type:categoryConstants.EDIT_CATEGORY_FAILURE,
+                payload:{
+                    message:"Something wrong"
+                }
+            })
+        }
+    }
+}

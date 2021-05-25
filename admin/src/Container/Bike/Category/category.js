@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCategory, deleteCategory, getCategory } from '../../../Actions';
+import { createCategory, deleteCategory, editCategory, getCategory } from '../../../Actions';
 import Table from 'react-bootstrap/Table';
 import { Modal, Button } from 'react-bootstrap'
 import './style.css'
@@ -10,6 +10,25 @@ import Input from '../../../Component/Input/Input';
 import { IconContext } from 'react-icons'
 
 const Ctaegory = () => {
+    const [display, setDisplay] = useState(false);
+    const directClose = () =>{ 
+        const form = new FormData();
+        form.append("_id",categoryDetails._id);
+        if(name){
+            form.append("name", name);
+
+        }
+        if(categoryImage){
+            form.append("categoryImage", categoryImage);
+        }
+        dispatch(editCategory(form));
+        setDisplay(false)
+    };
+    const directShow = (item) => {
+        setName(item.name);
+        setcategoryDetails(item);
+        setDisplay(true);
+    }
     const [view, setView] = useState(false);
     const [categoryDetails, setcategoryDetails] = useState({});
 
@@ -68,8 +87,8 @@ const Ctaegory = () => {
                                                 } alt="" width="100" height="100" />
                                             </td>
                                             <td className="bb">
-                                                <button className="btn btn-info"><BiEdit /></button>
-                                                <button className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={()=>{manageShow(item)}}><RiDeleteBin5Line /></button>
+                                                <button className="btn btn-info" onClick={() => { directShow(item) }}><BiEdit /></button>
+                                                <button className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={() => { manageShow(item) }}><RiDeleteBin5Line /></button>
                                             </td>
 
 
@@ -103,7 +122,7 @@ const Ctaegory = () => {
                         />
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={()=>setShow(false)}>
+                        <Button variant="secondary" onClick={() => setShow(false)}>
                             Close
                         </Button>
                         <Button variant="primary" onClick={handleClose}>
@@ -111,18 +130,47 @@ const Ctaegory = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-                {/*  Modal for delete  */}               
+                {/*  Modal for delete  */}
                 <Modal show={view} onHide={manageClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Confirmation</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>Do you want to delete this item ?</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={()=>setView(false)}>
+                        <Button variant="primary" onClick={() => setView(false)}>
                             No
                         </Button>
                         <Button variant="danger" onClick={manageClose}>
                             Yes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/*  Modal for edit  */}
+                <Modal show={display} onHide={directClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edid category</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Input
+                            label="Category name :"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+
+                        />
+                        <Input
+                            label="Category Image :"
+                            type="file"
+                            name="categoryImage"
+                            onChange={(e) => setcategoryImage(e.target.files[0])}
+                        />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setDisplay(false)}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={directClose}>
+                            Apply
                         </Button>
                     </Modal.Footer>
                 </Modal>
