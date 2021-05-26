@@ -8,6 +8,7 @@ exports.createBikeBrand = (req,res)=>{
     const brandObj = {
         name:req.body.name,
         slug:slugify(req.body.name),
+        description : req.body.description
         
     }
     if(req.file){

@@ -13,6 +13,10 @@ const bikeBrandSchema = new mongoose.Schema({
     },
     brandImage:{
         type:String
+    },
+    description:{
+        type:String,
+        required:true
     }
     
 
