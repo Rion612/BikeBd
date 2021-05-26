@@ -87,8 +87,8 @@ const Ctaegory = () => {
                                                 } alt="" width="100" height="100" />
                                             </td>
                                             <td className="bb">
-                                                <button className="btn btn-info" onClick={() => { directShow(item) }}><BiEdit /></button>
-                                                <button className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={() => { manageShow(item) }}><RiDeleteBin5Line /></button>
+                                                <button className="btn btn-info" onClick={() => { directShow(item) }} title="Edit"><BiEdit /></button>
+                                                <button className="btn btn-danger" style={{ marginLeft: "10px" }} title="Delete" onClick={() => { manageShow(item) }}><RiDeleteBin5Line /></button>
                                             </td>
 
 
