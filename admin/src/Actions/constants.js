@@ -19,6 +19,13 @@ export const categoryConstants = {
 
 
 };
+
+export const brandConstants ={
+  GET_BRAND_REQUEST: "GET_BRAND_REQUEST",
+  GET_BRAND_SUCCESS: "GET_BRAND_SUCCESS",
+  GET_BRAND_FAILURE: "GET_BRAND_FAILURE",
+
+}
 export const productConstants = {
   GET_PRODUCT_REQUEST: "GET_PRODUCT_REQUEST",
   ADD_PRODUCT_REQUEST: "ADD_PRODUCT_REQUEST",
