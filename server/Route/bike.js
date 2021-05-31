@@ -1,10 +1,16 @@
 const express = require('express');
-const { createBikeCategory, getBikeCategory, deleteCategory, editCategory } = require('../Controller/bikeCategory');
+const 
+{ 
+  createBikeCategory,
+   getBikeCategory,
+    deleteCategory, 
+    editCategory
+   } = require('../Controller/bikeCategory');
 const multer = require('multer');
 const shortid =require('shortid');
 const path =require('path');
 const { createBike } = require('../Controller/bike');
-const { createBikeBrand,getBikeBrand } = require('../Controller/bikeBrand');
+const { createBikeBrand,getBikeBrand, editBrand, deleteBrand } = require('../Controller/bikeBrand');
 
 
 
@@ -25,6 +31,8 @@ const storage = multer.diskStorage({
 
   router.post('/create/bike/brand',upload.single('brandImage'),createBikeBrand);
   router.get('/get/bike/brands',getBikeBrand);
+  router.post('/edit/bike/brand',upload.single('brandImage'),editBrand);
+  router.post('/delete/bike/brand',deleteBrand);
 
 router.post('/create/bike/category',upload.single('categoryImage'),createBikeCategory);
 router.post('/delete/bike/category',deleteCategory);

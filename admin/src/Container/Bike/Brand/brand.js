@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBrands } from '../../../Actions/brand.actions';
+import { createBrand, deleteBrand, editBrand, getBrands } from '../../../Actions/brand.actions';
 import Table from 'react-bootstrap/Table';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 import { BiEdit, BiDetail } from 'react-icons/bi';
@@ -24,11 +24,29 @@ const Brand = () => {
     }
     const [view, setView] = useState(false);
     const manageClose = () => {
+        dispatch(deleteBrand(details));
         setView(false)
     };
     const manageShow = (item) => {
         setdetails(item);
         setView(true)
+    };
+    const [watch, setWatch] = useState(false);
+
+    const controlClose = () => {
+        const form = new FormData();
+        form.append("name", name);
+        form.append("description",description);
+        form.append("brandImage", brandImage);
+
+        dispatch(createBrand(form));
+        setname("");
+        setdescription("");
+
+        setWatch(false)
+    };
+    const controlShow = () => {
+        setWatch(true)
     };
 
     const [display, setDisplay] = useState(false);
@@ -45,7 +63,10 @@ const Brand = () => {
         if (brandImage) {
             form.append("brandImage", brandImage);
         }
-        setDisplay(false)
+        dispatch(editBrand(form));
+        setname("");
+        setdescription("");
+        setDisplay(false);
     };
     const directShow = (item) => {
         setname(item.name);
@@ -62,7 +83,7 @@ const Brand = () => {
     return (
         <div className="brand">
             <div className="title"><h3>Bike brands</h3></div>
-            <div className="b"><button className="btn btn-outline-primary" >Create brand</button></div>
+            <div className="b"><button className="btn btn-outline-primary" onClick={controlShow} >Create brand</button></div>
             <div className="content">
                 <div>
                     <Table responsive="md">
@@ -81,8 +102,8 @@ const Brand = () => {
                                     <tr key={index} className="roww">
                                         <td>{index + 1}</td>
                                         <td>{item.name}</td>
-                                        <td>{item.createdAt.split('T')[0]}</td>
-                                        <td>{item.updatedAt.split('T')[0]}</td>
+                                        <td>{(item.createdAt).split('T')[0]}</td>
+                                        <td>{(item.updatedAt).split('T')[0]}</td>
                                         <td className="bb">
                                             <button className="btn btn-info" title="Edit" onClick={() => directShow(item)}><BiEdit /> Edit</button>
                                             <button className="btn btn-danger" style={{ marginLeft: "10px" }} title="Delete" onClick={() => manageShow(item)}><RiDeleteBin5Line />Delete</button>
@@ -96,6 +117,7 @@ const Brand = () => {
                         </tbody>
                     </Table>
                 </div>
+                {/*  Modal for details  */}
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Brand Details</Modal.Title>
@@ -170,6 +192,41 @@ const Brand = () => {
                         </Button>
                         <Button variant="primary" onClick={directClose}>
                             Apply
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/*  Modal for create  */}
+                <Modal show={watch} onHide={controlClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Create brand</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Input
+                            label="Brand name :"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setname(e.target.value)}
+
+                        />
+                        <div className="form-group">
+                        <label>Description:</label>
+                        <textarea className="form-control" value={description} rows="6" cols="54" onChange={(e) => setdescription(e.target.value)}/>
+
+                        </div>
+                        
+                        <Input
+                            label="Brand Image :"
+                            type="file"
+                            name="brandImage"
+                            onChange={(e) => setbrandImage(e.target.files[0])}
+                        />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setWatch(false)}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={controlClose}>
+                            Create
                         </Button>
                     </Modal.Footer>
                 </Modal>
