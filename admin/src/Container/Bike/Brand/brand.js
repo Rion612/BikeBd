@@ -146,7 +146,7 @@ const Brand = () => {
                     </Modal.Footer>
                 </Modal>
                 {/*  Modal for delete  */}
-                <Modal show={view} onHide={manageClose}>
+                <Modal show={view} onHide={() => setView(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Confirmation</Modal.Title>
                     </Modal.Header>
