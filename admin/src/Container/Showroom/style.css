@@ -1,3 +1,14 @@
 .showroom{
     margin-top: 80px;
 }
+.bbb{
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+.searchBar{
+    width: 25%;
+}

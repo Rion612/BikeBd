@@ -12,7 +12,7 @@ export const getShowroom= ()=>{
             dispatch({
                 type:showroomConstants.GET_SHOWROOM_SUCCESS,
                 payload:{
-                    showrooms:res.data.showrooms
+                    showrooms:res.data._showrooms
                 }
             })
         }

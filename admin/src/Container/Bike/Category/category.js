@@ -101,7 +101,7 @@ const Ctaegory = () => {
 
                 </div>
                 {/*  Modal for create  */}
-                <Modal show={show} onHide={handleClose} animation={false}>
+                <Modal show={show} onHide={() => setShow(false)} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Create category</Modal.Title>
                     </Modal.Header>
@@ -131,7 +131,7 @@ const Ctaegory = () => {
                     </Modal.Footer>
                 </Modal>
                 {/*  Modal for delete  */}
-                <Modal show={view} onHide={manageClose}>
+                <Modal show={view} onHide={() => setView(false)} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Confirmation</Modal.Title>
                     </Modal.Header>
@@ -146,7 +146,7 @@ const Ctaegory = () => {
                     </Modal.Footer>
                 </Modal>
                 {/*  Modal for edit  */}
-                <Modal show={display} onHide={directClose}>
+                <Modal show={display} onHide={() => setDisplay(false)} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edid category</Modal.Title>
                     </Modal.Header>

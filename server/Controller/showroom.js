@@ -1,3 +1,4 @@
+const Bikebrand = require('../Model/Bikebrand');
 const Showroom = require('../Model/Showroom');
 
 
@@ -20,7 +21,8 @@ exports.createShowroom = (req,res)=>{
                 address : req.body.address,
                 district : req.body.district,
                 thana : req.body.thana,
-                cellNo : req.body.cellNo
+                cellNo : req.body.cellNo,
+                brand : req.body.brand
 
             }
 
@@ -40,18 +42,21 @@ exports.createShowroom = (req,res)=>{
         }
     })
 }
-exports.getAllShowrooms = (req,res)=>{
-    Showroom.find({})
-    .exec((error,showrooms)=>{
+exports.getAllShowrooms = async(req,res)=>{
+    const brands =await Bikebrand.find({}).exec();
+    const showrooms = await Showroom.find({})
+    .populate({path:'brand',select :"_id name brandImage"})
+    .exec((error,_showrooms)=>{
         if(error){
             return res.status(400).json({
-                error,
-              });
+                error
+            })
         }
-        else if(showrooms){
+        else{
             return res.status(200).json({
-                showrooms,
-            });
+                _showrooms
+            })
         }
-    })
+    });
+    
 }

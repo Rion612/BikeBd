@@ -124,7 +124,7 @@ export default (state = initialState, action) => {
         case brandConstants.ADD_BRAND_FAILURE:
             state = {
                 ...state,
-                message: action.payload.message
+                error: action.payload.message
 
             }
             break;

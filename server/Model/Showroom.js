@@ -28,7 +28,10 @@ const showroomSchema = new mongoose.Schema({
     },
     cellNo: {
         type: Number
-    }
+    },
+    brand:{
+        type: mongoose.Schema.Types.ObjectId, ref: 'BikeBrand',
+    },
 }, { timestamps: true });
 
 module.exports = mongoose.model("Showroom",showroomSchema);

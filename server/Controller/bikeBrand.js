@@ -18,7 +18,9 @@ exports.createBikeBrand = (req,res)=>{
     const Bikeb = new BikeBrand(brandObj);
     Bikeb.save((error,bikeBrand)=>{
         if(error){
-            res.status(400).json({error});
+            res.status(400).json({
+                message : "Something happend wrong!"
+            });
         }
         else{
             res.status(201).json({bikeBrand});

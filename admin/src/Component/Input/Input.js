@@ -14,6 +14,7 @@ function Input(props) {
                     value={props.value}
                     onChange = {props.onChange}
                     name={props.name}
+                    icon ={props.icon}
                     />
                 </Form.Group>
             </Form>

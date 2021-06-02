@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBrand, deleteBrand, editBrand, getBrands } from '../../../Actions/brand.actions';
 import Table from 'react-bootstrap/Table';
-import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
+import { Modal, Button, Alert } from 'react-bootstrap';
 import { BiEdit, BiDetail } from 'react-icons/bi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import Input from '../../../Component/Input/Input';
@@ -36,7 +36,7 @@ const Brand = () => {
     const controlClose = () => {
         const form = new FormData();
         form.append("name", name);
-        form.append("description",description);
+        form.append("description", description);
         form.append("brandImage", brandImage);
 
         dispatch(createBrand(form));
@@ -80,10 +80,19 @@ const Brand = () => {
     }, []);
 
     const brand = useSelector(state => state.brand);
+
     return (
         <div className="brand">
             <div className="title"><h3>Bike brands</h3></div>
-            <div className="b"><button className="btn btn-outline-primary" onClick={controlShow} >Create brand</button></div>
+            {
+                brand.error ?
+                    <Alert variant="danger">
+                        <Alert.Heading className="text-center">{brand.error}</Alert.Heading>
+                    </Alert>
+                    : null
+
+            }
+            <div className="bb"><button className="btn btn-outline-primary" onClick={controlShow} >Create brand</button></div>
             <div className="content">
                 <div>
                     <Table responsive="md">
@@ -118,7 +127,7 @@ const Brand = () => {
                     </Table>
                 </div>
                 {/*  Modal for details  */}
-                <Modal show={show} onHide={handleClose}>
+                <Modal show={show} onHide={handleClose} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Brand Details</Modal.Title>
                     </Modal.Header>
@@ -146,7 +155,7 @@ const Brand = () => {
                     </Modal.Footer>
                 </Modal>
                 {/*  Modal for delete  */}
-                <Modal show={view} onHide={() => setView(false)}>
+                <Modal show={view} onHide={() => setView(false)} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Confirmation</Modal.Title>
                     </Modal.Header>
@@ -161,7 +170,7 @@ const Brand = () => {
                     </Modal.Footer>
                 </Modal>
                 {/*  Modal for edit  */}
-                <Modal show={display} onHide={directClose}>
+                <Modal show={display} onHide={() => setDisplay(false)} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit brand</Modal.Title>
                     </Modal.Header>
@@ -174,11 +183,11 @@ const Brand = () => {
 
                         />
                         <div className="form-group">
-                        <label>Description:</label>
-                        <textarea className="form-control" value={description} rows="6" cols="54" onChange={(e) => setdescription(e.target.value)}/>
+                            <label>Description:</label>
+                            <textarea className="form-control" value={description} rows="6" cols="54" onChange={(e) => setdescription(e.target.value)} />
 
                         </div>
-                        
+
                         <Input
                             label="Brand Image :"
                             type="file"
@@ -196,7 +205,7 @@ const Brand = () => {
                     </Modal.Footer>
                 </Modal>
                 {/*  Modal for create  */}
-                <Modal show={watch} onHide={controlClose}>
+                <Modal show={watch} onHide={() => setWatch(false)} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>Create brand</Modal.Title>
                     </Modal.Header>
@@ -209,11 +218,11 @@ const Brand = () => {
 
                         />
                         <div className="form-group">
-                        <label>Description:</label>
-                        <textarea className="form-control" value={description} rows="6" cols="54" onChange={(e) => setdescription(e.target.value)}/>
+                            <label>Description:</label>
+                            <textarea className="form-control" value={description} rows="6" cols="54" onChange={(e) => setdescription(e.target.value)} />
 
                         </div>
-                        
+
                         <Input
                             label="Brand Image :"
                             type="file"
