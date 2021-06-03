@@ -31,7 +31,7 @@ exports.createHelmet = (req,res)=>{
     })
 }
 
-exports.getBike =(req,res)=>{
+exports.gethelmets =(req,res)=>{
     const { slug } =req.params;
 
     HelmetBrand.findOne({slug : slug})
