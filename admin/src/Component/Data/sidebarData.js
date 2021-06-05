@@ -4,6 +4,9 @@ import { HiClipboardList } from 'react-icons/hi';
 import { AiOutlineDashboard,AiOutlineShop } from "react-icons/ai";
 import { RiMotorbikeFill } from "react-icons/ri";
 import { SiBrandfolder } from 'react-icons/si';
+import { GiFullMotorcycleHelmet } from 'react-icons/gi';
+
+import { BiNews } from 'react-icons/bi';
 export const sidebarData = [
     {
         title :'Dashboard',
@@ -34,6 +37,24 @@ export const sidebarData = [
         title :'Showrooms',
         path :'/bike/showrooms',
         icon :<AiOutlineShop/>,
+        cName :'nav-text'
+    },
+    {
+        title :'Helmets brand',
+        path :'/helmets/brand',
+        icon :<SiBrandfolder/>,
+        cName :'nav-text'
+    },
+    {
+        title :'Helmets',
+        path :'/helmets',
+        icon :<GiFullMotorcycleHelmet/>,
+        cName :'nav-text'
+    },
+    {
+        title :'News',
+        path :'/news',
+        icon :<BiNews/>,
         cName :'nav-text'
     }
 

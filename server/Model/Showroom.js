@@ -27,7 +27,7 @@ const showroomSchema = new mongoose.Schema({
         required: true,
     },
     cellNo: {
-        type: Number
+        type: String
     },
     brand:{
         type: mongoose.Schema.Types.ObjectId, ref: 'BikeBrand',
