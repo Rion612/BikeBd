@@ -1,0 +1,18 @@
+.helmet{
+    margin-top: 80px;
+}
+.chelmet{
+    margin: 50px 30px 40px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.coll2{
+    padding: 20px;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.9);
+}
+.coll1{
+    padding: 20px;
+    width: 55%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.9);
+}

@@ -61,3 +61,18 @@ exports.gethelmets =(req,res)=>{
         }
     })
 }
+exports.getAllHelmet = (req,res)=>{
+    Helmet.find({})
+    .exec((error,helmets)=>{
+        if(error){
+            return res.status(400).json({
+                message :"something wrong !"
+            })
+        }
+        else{
+            return res.status(200).json({
+                helmets
+            })
+        }
+    })
+}

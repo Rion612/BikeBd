@@ -1,6 +1,5 @@
 import React from 'react'
 import './style.css'
-import Card from '../../Component/Card/Card'
 
 function Home() {
     return (

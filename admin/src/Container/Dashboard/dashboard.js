@@ -1,5 +1,4 @@
 import React from 'react';
-import CardComponent from '../../Component/Card/Card';
 import './dash.css'
 
 const dashboard = () => {

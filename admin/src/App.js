@@ -11,6 +11,7 @@ import Ctaegory from './Container/Bike/Category/category';
 import Header from './Component/Header/Header';
 import Showroom from './Container/Showroom/Showroom';
 import dashboard from './Container/Dashboard/dashboard';
+import Helmet from './Container/Helmet/Helmet';
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
           <Route path="/bike/brand" exact  component={Brand}/>
           <Route path="/bike/category" exact component={Ctaegory}/>
           <Route path="/bike/showrooms" exact component={Showroom}/>
+          <Route path="/helmets" exact component={Helmet}/>
         </Switch>
       </Router>
     </div>
