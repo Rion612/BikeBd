@@ -16,3 +16,27 @@
     width: 55%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.9);
 }
+.paginationBttn{
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+    font-size: large;   
+}
+.paginationBttn a{
+    padding: 10px 30px 10px 30px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #087cfc;
+}
+.paginationBttn a:hover{
+    background-color: #83bbf8;
+
+}
+.activePagination a{
+    background-color: #83bbf8;
+}
