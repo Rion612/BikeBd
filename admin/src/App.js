@@ -12,8 +12,17 @@ import Header from './Component/Header/Header';
 import Showroom from './Container/Showroom/Showroom';
 import dashboard from './Container/Dashboard/dashboard';
 import Helmet from './Container/Helmet/Helmet';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getBrands} from './Actions';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBrands());
+}, []);
+
+
   
   return (
     <div className="App">

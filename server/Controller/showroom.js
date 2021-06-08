@@ -34,7 +34,7 @@ exports.createShowroom = (req,res)=>{
                       error,
                     });
                   } else if (_showrooms) {
-                    return res.status(200).json({
+                    return res.status(201).json({
                         _showrooms,
                     });
                   }

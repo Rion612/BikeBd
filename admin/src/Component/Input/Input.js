@@ -6,7 +6,7 @@ function Input(props) {
     return (
         <>
             <Form>
-                <Form.Group controlId="exampleForm.ControlInput1">
+                <Form.Group>
                     <Form.Label>{props.label}</Form.Label>
                     <Form.Control
                         type={props.type}

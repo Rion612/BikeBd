@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createBrand, deleteBrand, editBrand, getBrands } from '../../../Actions/brand.actions';
+import { createBrand, deleteBrand, editBrand } from '../../../Actions/brand.actions';
 import Table from 'react-bootstrap/Table';
 import { Modal, Button, Alert } from 'react-bootstrap';
 import { BiEdit, BiDetail } from 'react-icons/bi';
@@ -75,9 +75,7 @@ const Brand = () => {
         setDisplay(true);
     }
 
-    useEffect(() => {
-        dispatch(getBrands());
-    }, []);
+    
 
     const brand = useSelector(state => state.brand);
 

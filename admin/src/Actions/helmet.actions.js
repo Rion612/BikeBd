@@ -32,6 +32,7 @@ export const getAllhelmet = ()=>{
                 dispatch({
                     type:helmetConstants.GET_HELMET_FAILURE,
                     payload:{
+                        error,
                         message :"Something happend wrong!"
                     }
                 })
