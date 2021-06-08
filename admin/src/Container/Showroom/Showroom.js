@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createShowroom, getShowroom } from '../../Actions/showroom.actions';
+import { createShowroom, deleteShowroom, editShowroom, getShowroom } from '../../Actions/showroom.actions';
 import './style.css';
 import { Table, Modal, Button, Spinner } from 'react-bootstrap'
 import Input from '../../Component/Input/Input';
@@ -55,6 +55,18 @@ function Showroom() {
         setDisplay(true);
     }
     const directClose = () => {
+        const updateObj = {
+            name,
+            address,
+            cellNo,
+            thana,
+            district,
+            brand : brandId
+        };
+        updateObj._id = showroomdetails._id;
+
+        dispatch(editShowroom(updateObj));
+        
         setname("");
         setaddress("");
         setcellNo("");
@@ -66,6 +78,7 @@ function Showroom() {
     }
     const [view, setView] = useState(false);
     const manageClose = () => {
+        dispatch(deleteShowroom(showroomdetails));
         setView(false);
     }
     const manageView = (item) => {
