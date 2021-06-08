@@ -60,3 +60,20 @@ exports.getAllShowrooms = async(req,res)=>{
     });
     
 }
+exports.deleteShowroom= (req, res) => {
+    Showroom.findOneAndDelete({ _id: req.body._id })
+        .exec((error, showroom) => {
+            if (error) {
+                return res.status(400).json({
+                    message: "Something Wrong"
+                });
+            }
+            else if (showroom) {
+
+                return res.status(200).json(
+                    { message: "Item is deleted successfully" }
+                );
+            }
+
+        })
+}
