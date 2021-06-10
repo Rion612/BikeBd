@@ -9,12 +9,14 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import ReactPaginate from 'react-paginate';
 
 const Helmet = () => {
+    const [helemetbrandId, sethelemetbrandId] = useState("");
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllhelmet());
 
     }, []);
     const helmet = useSelector(state => state.helmets);
+    const hbrands = useSelector(state=>state.helmetBrands);
     const totalHelmets = helmet.helmets;
     const [pageNumber, setpageNumber] = useState(0);
     const helmetPerPage = 5;
@@ -82,6 +84,20 @@ const Helmet = () => {
                         label="Distributor name:"
                         type="text"
                     />
+                    <label>Helmet Brand :</label>
+                    <select
+                        className="form-control"
+                        value={helemetbrandId}
+                        onChange={(e) => sethelemetbrandId(e.target.value)}
+                    >
+                        <option>Select brand</option>
+                        {hbrands.helmetBrands.map((option, index) => (
+
+                            <option key={index} value={option._id}>
+                                {option.name}
+                            </option>
+                        ))}
+                    </select>
                     <Input
                         label="Helmet Image :"
                         type="file"

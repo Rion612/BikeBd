@@ -14,27 +14,35 @@ import dashboard from './Container/Dashboard/dashboard';
 import Helmet from './Container/Helmet/Helmet';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getBrands} from './Actions';
+import { getBrands, getHelmetBrand } from './Actions';
+import HelmetBrand from './Container/Helmet brand/HelmetBrand';
+import News from './Container/News/News';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBrands());
-}, []);
+  }, []);
+  useEffect(() => {
+    dispatch(getHelmetBrand());
+  }, []);
 
 
-  
+
+
   return (
     <div className="App">
       <Router>
-        <Header/>
+        <Header />
         <Switch>
-          <Route path="/" exact component={dashboard}/>
-          <Route path="/bike" exact  component={Bike}/>
-          <Route path="/bike/brand" exact  component={Brand}/>
-          <Route path="/bike/category" exact component={Ctaegory}/>
-          <Route path="/bike/showrooms" exact component={Showroom}/>
-          <Route path="/helmets" exact component={Helmet}/>
+          <Route path="/" exact component={dashboard} />
+          <Route path="/bike" exact component={Bike} />
+          <Route path="/bike/brand" exact component={Brand} />
+          <Route path="/bike/category" exact component={Ctaegory} />
+          <Route path="/bike/showrooms" exact component={Showroom} />
+          <Route path="/helmets" exact component={Helmet} />
+          <Route path="/helmets/brand" exact component={HelmetBrand} />
+          <Route path="/news" exact component={News} />
         </Switch>
       </Router>
     </div>

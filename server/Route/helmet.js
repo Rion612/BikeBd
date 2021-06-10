@@ -1,5 +1,5 @@
 const express = require('express');
-const { createHelemetBrand } = require('../Controller/helmetBrand');
+const { createHelemetBrand, getHelmetBrand, editHelmetBrand, deleteHelmetBrand } = require('../Controller/helmetBrand');
 const multer = require('multer');
 const shortid =require('shortid');
 const path =require('path');
@@ -18,6 +18,10 @@ const storage = multer.diskStorage({
    
   const upload = multer({ storage })
 router.post('/create/helmet/brand',upload.single('hbrandImage'),createHelemetBrand);
+router.get('/get/helmet/brands',getHelmetBrand);
+
+router.post('/edit/helmet/brand',upload.single('hbrandImage'),editHelmetBrand);
+router.post('/delete/helmet/brand',deleteHelmetBrand);
 
 
 router.post('/create/helmet',upload.single('helmetImage'),createHelmet);

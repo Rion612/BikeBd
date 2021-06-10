@@ -12,7 +12,7 @@ const makeUpadted = (showrooms, showroom) => {
         address: showroom.address,
         district: showroom.district,
         thana: showroom.thana,
-        cellNo : showroom.cellNo,
+        cellNo: showroom.cellNo,
         createdAt: showroom.createdAt,
         updatedAt: showroom.updatedAt,
         brand: showroom.brand
@@ -21,6 +21,22 @@ const makeUpadted = (showrooms, showroom) => {
 }
 const makeUpadted2 = (showrooms, id) => {
     const s = showrooms.filter(x => x._id !== id);
+    return s;
+
+}
+const makeUpadted3 = (showrooms, showroom) => {
+    const s = showrooms.filter(x => x._id !== showroom._id);
+    s.push({
+        _id: showroom._id,
+        name: showroom.name,
+        address: showroom.address,
+        district: showroom.district,
+        thana: showroom.thana,
+        cellNo: showroom.cellNo,
+        createdAt: showroom.createdAt,
+        updatedAt: showroom.updatedAt,
+        brand: showroom.brand
+    })
     return s;
 
 }
@@ -90,6 +106,27 @@ export default (state = initialState, action) => {
                 ...state,
                 message: action.payload.message
 
+            }
+            break;
+        case showroomConstants.EDIT_SHOWROOM_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case showroomConstants.EDIT_SHOWROOM_SUCCESS:
+            const showroom = action.payload.showroom;
+            const upgradeShowroom3 = makeUpadted3(state.showrooms,showroom);
+            state = {
+                ...state,
+                loading: false,
+                showrooms: upgradeShowroom3
+            }
+            break;
+        case showroomConstants.EDIT_SHOWROOM_FAILURE:
+            state = {
+                ...state,
+                error: action.payload.message
             }
             break;
 

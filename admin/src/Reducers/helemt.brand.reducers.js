@@ -1,23 +1,9 @@
-import { brandConstants, showroomConstants } from "../Actions/constants"
+import { helemtbrandConstants } from '../Actions/constants'
 
 const initialState = {
-    brands: [],
     error: "",
-    loading: false
-}
-const makeUpdate3 = (brands, bikeBrand) => {
-
-    brands.push({
-        _id: bikeBrand._id,
-        name: bikeBrand.name,
-        slug: bikeBrand.slug,
-        description: bikeBrand.description,
-        createdAt: bikeBrand.createdAt,
-        updatedAt: bikeBrand.updatedAt,
-        brandImage: bikeBrand.brandImage
-    });
-    return brands;
-
+    loading: false,
+    helmetBrands: []
 }
 const makeUpdate = (brands, b) => {
     const br = brands.filter(x => x._id !== b._id);
@@ -28,7 +14,7 @@ const makeUpdate = (brands, b) => {
         description: b.description,
         createdAt: b.createdAt,
         updatedAt: b.updatedAt,
-        brandImage: b.brandImage
+        brandImage: b.hbrandImage
     })
     return br;
 
@@ -38,99 +24,110 @@ const makeUpdate2 = (brands, id) => {
     return b;
 
 }
+const makeUpdate3 = (brands, helmetbrand) => {
+
+    brands.push({
+        _id: helmetbrand._id,
+        name: helmetbrand.name,
+        slug: helmetbrand.slug,
+        description: helmetbrand.description,
+        createdAt: helmetbrand.createdAt,
+        updatedAt: helmetbrand.updatedAt,
+        hbrandImage: helmetbrand.hbrandImage
+    });
+    return brands;
+
+}
+
 export default (state = initialState, action) => {
-    console.log(action);
     switch (action.type) {
-        case brandConstants.GET_BRAND_REQUEST:
+        case helemtbrandConstants.GET_HELMET_BRAND_REQUEST:
             state = {
                 ...initialState,
                 loading: true
             }
             break;
-        case brandConstants.GET_BRAND_SUCCESS:
+        case helemtbrandConstants.GET_HELMET_BRAND_SUCCESS:
             state = {
                 ...state,
-                brands: action.payload.bikeBrand,
+                helmetBrands: action.payload.helmetBrand,
                 loading: false
             }
             break;
-        case brandConstants.GET_BRAND_FAILURE:
+        case helemtbrandConstants.GET_HELMET_BRAND_FAILURE:
             state = {
                 ...state,
                 loading: false,
                 error: action.payload.error
             }
             break;
-        case brandConstants.EDIT_BRAND_REQUEST:
+        case helemtbrandConstants.EDIT_HELMET_BRAND_REQUEST:
             state = {
                 ...state,
                 loading: true
             }
             break;
-        case brandConstants.EDIT_BRAND_SUCCESS:
-            const b = action.payload.brand;
-            const updatebrands = makeUpdate(state.brands, b);
+        case helemtbrandConstants.EDIT_HELMET_BRAND_SUCCESS:
+            const b = action.payload.helmetBrand;
+            const updatebrands = makeUpdate(state.helmetBrands, b);
             state = {
                 ...state,
                 loading: false,
-                brands: updatebrands
+                helmetBrands: updatebrands
             }
             break;
-        case brandConstants.EDIT_BRAND_FAILURE:
+        case helemtbrandConstants.EDIT_HELMET_BRAND_FAILURE:
             state = {
                 ...state,
                 error: action.payload.message
             }
             break;
-        case brandConstants.DEL_BRAND_REQUEST:
+        case helemtbrandConstants.DEL_HELMET_BRAND_REQUEST:
             state = {
                 ...state,
                 loading: true
             }
             break;
-        case brandConstants.DEL_BRAND_SUCCESS:
+        case helemtbrandConstants.DEL_HELMET_BRAND_SUCCESS:
             const id = action.payload.id;
-            const updatebrands2 = makeUpdate2(state.brands, id);
+            const updatebrands2 = makeUpdate2(state.helmetBrands, id);
             state = {
                 ...state,
-                brands: updatebrands2,
+                helmetBrands: updatebrands2,
                 loading: false
 
             }
             break;
-        case brandConstants.DEL_BRAND_FAILURE:
+        case helemtbrandConstants.DEL_HELMET_BRAND_FAILURE:
             state = {
                 ...state,
                 message: action.payload.message
 
             }
             break;
-        case brandConstants.ADD_BRAND_REQUEST:
+        case helemtbrandConstants.ADD_HELMET_BRAND_REQUEST:
             state = {
                 ...state,
                 loading: true
             }
             break;
-        case brandConstants.ADD_BRAND_SUCCESS:
-            const bikeBrand = action.payload.bikeBrand;
-            const updatebrands3 = makeUpdate3(state.brands, bikeBrand);
+        case helemtbrandConstants.ADD_HELMET_BRAND_SUCCESS:
+            const helmetBrand = action.payload.helmetbrands;
+            const updatebrands3 = makeUpdate3(state.helmetBrands, helmetBrand);
             state = {
                 ...state,
-                brands: updatebrands3,
+                helmetBrands: updatebrands3,
                 loading: false
 
             }
             break;
-        case brandConstants.ADD_BRAND_FAILURE:
+        case helemtbrandConstants.ADD_HELMET_BRAND_FAILURE:
             state = {
                 ...state,
                 error: action.payload.message
 
             }
             break;
-        
-
     }
     return state;
-
 }

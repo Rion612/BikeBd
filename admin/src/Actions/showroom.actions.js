@@ -112,11 +112,12 @@ export const editShowroom = (item) => {
         await axios.post('/edit/showroom', item)
             .then((res) => {
                 if (res.status === 200) {
-
+                    const showroom = res.data.showroom;
+                    console.log(showroom);
                     dispatch({
                         type: showroomConstants.EDIT_SHOWROOM_SUCCESS,
                         payload: {
-                            showroom: res.data.showroom
+                            showroom
                         }
                     })
                 }
