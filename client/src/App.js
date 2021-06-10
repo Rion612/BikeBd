@@ -1,10 +1,14 @@
 import './App.css';
-import Home from './container/Home'
+import Header from './component/Header/Header';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <Home/>
+      <Router>
+        <Header />
+      </Router>
+
     </div>
   );
 }
