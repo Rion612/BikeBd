@@ -1,21 +1,83 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 .navdiv{
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 0 20px 0 20px;  
 }
-.navdiv a{
-    float: left;
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
+.nav-links{
+    list-style: none;
+    display: flex;  
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+}
+.home,
+.bike,
+.brands,
+.ebikes,
+.compare,
+.showrooms,
+.helmet,
+.scooter,
+.news,
+.contact{
     text-decoration: none;
-    font-size: 17px;
+    font-size: 18px;
+    padding: 5px 10px;
+    margin: 0 10px;
+    cursor: pointer;
     color: black;
 
 }
-.navdiv a:hover{
-    color:#4114e6;
+.mobile-menu-icon{
+    display: none;
+}
+@media screen and (max-width :1120px) {
+    .nav-links{
+        display: none;
+    }
+    .mobile-menu-icon{
+        display: block;
+        background: none;
+        font-size: 20px;
+        color: #fff;
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+    }
+    .nav-link-mobile{
+        position: absolute;
+        display: block;
+        list-style: none;
+        background-color: #060b26 ;
+        left: 0;
+        top: 70px;
+        transition: all 0.5s ease-out;
+        width: 100%;
+    }
+    .home,
+.bike,
+.brands,
+.ebikes,
+.compare,
+.showrooms,
+.helmet,
+.scooter,
+.news,
+.contact{
+    text-align: center;
+    padding: 32px;
+    color:#fff;
+    width: 100%;
+    transition: all 0.5s ease;
+
+}
 }
     
+
 
