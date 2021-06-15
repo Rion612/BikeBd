@@ -12,7 +12,7 @@ const Helmet = () => {
         <div>
             <Layout>
             <div className="container">
-                    <div className="title"><h2>Helmet Price In BD</h2></div>
+                    <div className="title"><h2>Helmet Brand In BD</h2></div>
                     <p className="paragraph">
                     Helmet is one of the must have safety gears for all the bikers.
                      But, it is also one of the most neglected things, as people are

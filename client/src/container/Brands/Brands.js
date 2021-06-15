@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Layout from '../../component/Layout/Layout';
 import './brands.css'
 import { Row, Col ,Card} from 'react-bootstrap';
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const Brands = () => {
     const brand = useSelector(state => state.brand);
