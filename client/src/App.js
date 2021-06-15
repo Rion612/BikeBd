@@ -10,11 +10,28 @@ import Scooter from './container/Scooter/Scooter';
 import Helmet from './container/Helmet/Helmet';
 import Brands from './container/Brands/Brands';
 import ElectricBike from './container/Electric bikes/Electric.bikes';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllhelmet, getBrands, getHelmetBrand } from './Actions';
+import Brandbike from './container/BranddBike/brandBike';
+import ScrollToTop from './component/ScrollToTop/ScrollToTop';
+import BrandHelmet from './container/BrandHelmet/BrandHelmet';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllhelmet());
+  }, []);
+  useEffect(() => {
+    dispatch(getBrands());
+  }, []);
+  useEffect(() => {
+    dispatch(getHelmetBrand());
+  }, []);
   return (
     <div>
       <Router>
+        <ScrollToTop/>
         <switch>
           <Route path="/bike_price" exact component={Bike}/>
           <Route path="/" exact component={Home}/>
@@ -26,6 +43,8 @@ function App() {
           <Route path="/helmets" exact component={Helmet}/>
           <Route path="/brands" exact component={Brands}/>
           <Route path="/bikes/electric_bikes" component={ElectricBike}/>
+          <Route path="/brands/:slug" component={Brandbike}/>
+          <Route path="/helmets/brand/:slug" component={BrandHelmet}/>
         </switch>
       </Router>
 

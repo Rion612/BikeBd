@@ -51,12 +51,12 @@
         padding: 10px 20px;
     }
     .nav-link-mobile{
-        position: absolute;
+        float: left;
+        position: relative;
         display: block;
         list-style: none;
         background-color: #060b26 ;
         left: 0;
-        top: 70px;
         transition: all 0.5s ease-out;
         width: 100%;
     }
