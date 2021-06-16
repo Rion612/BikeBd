@@ -1,0 +1,17 @@
+.contactForm{
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 10px;
+    margin-left: 20px;
+}
+.details{
+    padding:140px 0px 0px 140px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-right: 10px;
+    color: #fff;
+    background-color: rgb(23, 13, 160);
+    margin-left: 20px;
+    border-radius: 50%;
+
+}

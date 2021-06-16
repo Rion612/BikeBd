@@ -42,9 +42,9 @@ function App() {
           <Route path="/bike/scooter" exact component={Scooter}/>
           <Route path="/helmets" exact component={Helmet}/>
           <Route path="/brands" exact component={Brands}/>
-          <Route path="/bikes/electric_bikes" component={ElectricBike}/>
-          <Route path="/brands/:slug" component={Brandbike}/>
-          <Route path="/helmets/brand/:slug" component={BrandHelmet}/>
+          <Route path="/bikes/electric_bikes" exact component={ElectricBike}/>
+          <Route path="/brands/:slug" exact component={Brandbike}/>
+          <Route path="/helmets/brand/:slug" exact component={BrandHelmet}/>
         </switch>
       </Router>
 

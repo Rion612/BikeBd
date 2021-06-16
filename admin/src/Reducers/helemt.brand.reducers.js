@@ -14,7 +14,7 @@ const makeUpdate = (brands, b) => {
         description: b.description,
         createdAt: b.createdAt,
         updatedAt: b.updatedAt,
-        brandImage: b.hbrandImage
+        hbrandImage: b.hbrandImage
     })
     return br;
 

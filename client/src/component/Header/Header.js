@@ -29,7 +29,7 @@ const Header = () => {
                     <Link to="/bike_price" className="bike" ><li>Bike price</li></Link>
                     <Link to="/brands" className="brands" ><li>Brands</li></Link>
                     <Link to="/helmets" className="helmet" ><li>Helmet</li></Link>
-                    <Link to="showrooms" className="showrooms"><li>Showrooms</li></Link>
+                    <Link to="/showrooms" className="showrooms"><li>Showrooms</li></Link>
                     <Link to="/bike/scooter" className="scooter" ><li>Scooter</li></Link>
                     <Link to="/bikes/electric_bikes" className="ebikes"><li>Electric Bikes</li></Link>
                     <Link to="/news" className="news" > <li>News</li></Link>
