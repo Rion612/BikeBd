@@ -8,13 +8,13 @@ const Footer = () => {
             <Container fluid>
                 <Row>
                     <Col md={6} className="text-white p-5">
-                        <h3 className="text-center">About Bongo Bike</h3>
-                        <p className="text-justify">Bongo bike bd is one of the motorcycle oriented website in Bangladesh
+                        <h3 className="text-center">About BongoPedia</h3>
+                        <p className="text-justify">BongoPedia is one of the motorcycle oriented website in Bangladesh
                             where Bike enthusiasts from all over the country can find
                             all the information about any bike. From motorcycle price
                             in Bangladesh and Motorcycle Specification to the test ride
                             reviews of various bikes and first impression reviews of
-                            any newly launched bikes.Bongo bike is providing
+                            any newly launched bikes.BongoPedia is providing
                             information to everyone across the nation about various
                             offers from the motorcycle or related companies, news,
                             coverage of motorcycle based or related events, and any

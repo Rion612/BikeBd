@@ -36,11 +36,13 @@ const indexRoute = require('./Route/index');
 const showroomRoute = require('./Route/showroom');
 const bikeRoute = require('./Route/bike');
 const helmetRoute = require('./Route/helmet');
+const newsRoute = require('./Route/news');
 
 app.use("/api",indexRoute);
 app.use("/api",showroomRoute);
 app.use("/api",bikeRoute);
 app.use("/api",helmetRoute);
+app.use("/api",newsRoute);
 
 
 app.listen(process.env.PORT,()=>{
