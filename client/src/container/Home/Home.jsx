@@ -5,7 +5,9 @@ import './Home.css';
 function Home(props) {
     return (
         <Layout>
-            Home
+            <div className="Home">
+
+            </div>
         </Layout>
     );
 }
