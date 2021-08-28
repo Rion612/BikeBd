@@ -12,7 +12,7 @@ import Brands from './container/Brands/Brands';
 import ElectricBike from './container/Electric bikes/Electric.bikes';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllhelmet, getBrands, getHelmetBrand } from './Actions';
+import { getAllhelmet, getBrands, getHelmetBrand, getShowroom } from './Actions';
 import Brandbike from './container/BranddBike/brandBike';
 import ScrollToTop from './component/ScrollToTop/ScrollToTop';
 import BrandHelmet from './container/BrandHelmet/BrandHelmet';
@@ -28,6 +28,9 @@ function App() {
   useEffect(() => {
     dispatch(getHelmetBrand());
   }, []);
+  useEffect(()=>{
+    dispatch(getShowroom());
+  },[]);
   return (
     <div>
       <Router>

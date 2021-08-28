@@ -1,0 +1,10 @@
+.shadowDiv{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  font-size: 18px;
+  padding: 20px;
+}
+.tableCol1{
+    font-size: 25px;
+    font-weight: bold;
+}
