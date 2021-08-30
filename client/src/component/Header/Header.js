@@ -15,10 +15,7 @@ const Header = () => {
                 <Navbar style={{ backgroundColor: '#060b26' }} variant="dark">
                 <button className="mobile-menu-icon" onClick={showBar}>{ isMobile ? <i className="fa fa-times"></i> : <i className="fa fa-bars"></i>}</button>
                     <Navbar.Brand href="#home" className="mr-auto" style={{ fontSize: '30px' }}>BikePedia</Navbar.Brand>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-info">Search</Button>
-                    </Form>
+            
                 </Navbar>
 
             </div>

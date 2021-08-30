@@ -26,3 +26,17 @@ exports.createNews = (req, res) => {
         }
     })
 }
+exports.getAllNews =(req,res)=>{
+    News.find({}).exec((error,data)=>{
+        if(error){
+            return res.status(400).json({
+                message : "Something is wrong"
+            })
+        }
+        else{
+            return res.status(200).json({
+                data
+            })
+        }
+    })
+}

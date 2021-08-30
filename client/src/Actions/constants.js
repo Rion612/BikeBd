@@ -90,3 +90,8 @@ export const helemtbrandConstants ={
 
 
 }
+export const newsConstant = {
+  GET_NEWS_REQUEST: "GET_NEWS_REQUEST",
+  GET_NEWS_SUCCESS: "GET_NEWS_SUCCESS",
+  GET_NEWS_FAILURE: "GET_NEWS_FAILURE",
+}

@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const shortid = require('shortid');
 const path = require('path');
-const { createNews } = require('../Controller/news');
+const { createNews, getAllNews } = require('../Controller/news');
 
 
 const router = express.Router();
@@ -18,6 +18,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 router.post('/create/news', upload.single('NewsImage'),createNews);
+
+router.get('/get/all/news',getAllNews);
 
 
 
