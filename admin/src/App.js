@@ -14,7 +14,7 @@ import dashboard from './Container/Dashboard/dashboard';
 import Helmet from './Container/Helmet/Helmet';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getBrands, getHelmetBrand } from './Actions';
+import { getAllNews, getBrands, getHelmetBrand } from './Actions';
 import HelmetBrand from './Container/Helmet brand/HelmetBrand';
 import News from './Container/News/News';
 
@@ -26,6 +26,11 @@ function App() {
   useEffect(() => {
     dispatch(getHelmetBrand());
   }, []);
+
+  useEffect(() => {
+    dispatch(getAllNews());
+  }, []);
+
 
 
 

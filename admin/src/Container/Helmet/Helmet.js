@@ -10,6 +10,10 @@ import ReactPaginate from 'react-paginate';
 
 const Helmet = () => {
     const [helemetbrandId, sethelemetbrandId] = useState("");
+    const [name, setname] = useState('');
+    const [price, setprice] = useState('');
+    const [distributor, setdistributor] = useState('');
+    const [helmetImage, sethelmetImage] = useState('');
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllhelmet());
@@ -37,6 +41,19 @@ const Helmet = () => {
     });
     const changePage = ({selected})=>{
         setpageNumber(selected);
+    }
+    const submitHelmetHandler =(e)=>{
+        e.preventDefault();
+
+        const helmetObj ={
+            name,
+            price,
+            distributor,
+            helmetImage,
+            brand:helemetbrandId
+        }
+        console.log(helmetObj);
+
     }
 
     return (
@@ -75,14 +92,20 @@ const Helmet = () => {
                     <Input
                         label="Helmet name:"
                         type="text"
+                        value={name}
+                        onChange={(e)=>setname(e.target.value)}
                     />
                     <Input
                         label="Helmet price:"
                         type="text"
+                        value={price}
+                        onChange={(e)=>setprice(e.target.value)}
                     />
                     <Input
                         label="Distributor name:"
                         type="text"
+                        value={distributor}
+                        onChange={(e)=>setdistributor(e.target.value)}
                     />
                     <label>Helmet Brand :</label>
                     <select
@@ -101,8 +124,10 @@ const Helmet = () => {
                     <Input
                         label="Helmet Image :"
                         type="file"
+                        name="helmetImage"
+                        onChange={(e)=>sethelmetImage(e.target.files[0])}
                     />
-                    <Button variant="primary" type="submit" size="lg" block>
+                    <Button variant="primary" type="submit" size="lg" block onClick={submitHelmetHandler}>
                         Submit
                         </Button>
 

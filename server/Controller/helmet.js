@@ -20,7 +20,7 @@ exports.createHelmet = (req,res)=>{
     helmet.save((error,_helmet)=>{
         if(error){
             return res.status(400).json({
-                error
+                message:"somethin is wrong!"
             })
         }
         else{

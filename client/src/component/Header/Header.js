@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
 import './header.css'
-import { Navbar, Button, Form, FormControl} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Navbar, Button, Form, FormControl } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
 
 
 
 const Header = () => {
     const [isMobile, setIsMobile] = useState(false);
-    const showBar = ()=>setIsMobile(!isMobile);
+    const showBar = () => setIsMobile(!isMobile);
     return (
         <div>
             <div>
-                
+
                 <Navbar style={{ backgroundColor: '#060b26' }} variant="dark">
-                <button className="mobile-menu-icon" onClick={showBar}>{ isMobile ? <i className="fa fa-times"></i> : <i className="fa fa-bars"></i>}</button>
+                    <button className="mobile-menu-icon" onClick={showBar}>{isMobile ? <i className="fa fa-times"></i> : <i className="fa fa-bars"></i>}</button>
                     <Navbar.Brand href="#home" className="mr-auto" style={{ fontSize: '30px' }}>BikePedia</Navbar.Brand>
-            
+
                 </Navbar>
 
             </div>
 
             <div className="navdiv">
-                <ul className={ isMobile ? "nav-link-mobile" : "nav-links"} onClick={()=>setIsMobile(false)}>
-                    <Link to="/" className="home" > <li>Home</li></Link>
-                    <Link to="/bike_price" className="bike" ><li>Bike price</li></Link>
-                    <Link to="/brands" className="brands" ><li>Brands</li></Link>
-                    <Link to="/helmets" className="helmet" ><li>Helmet</li></Link>
-                    <Link to="/showrooms" className="showrooms"><li>Showrooms</li></Link>
-                    <Link to="/bike/scooter" className="scooter" ><li>Scooter</li></Link>
-                    <Link to="/bikes/electric_bikes" className="ebikes"><li>Electric Bikes</li></Link>
-                    <Link to="/news" className="news" > <li>News,Offers & Travel Story</li></Link>
-                    <Link to="/comparison" className="compare" ><li>Comparison</li></Link>
-                    <Link to="/contact" className="contact"><li>Contact us</li></Link>
+                <ul className={isMobile ? "nav-link-mobile" : "nav-links"} onClick={() => setIsMobile(false)}>
+                    <NavLink to="/" className="home" activeStyle={{ color: "blue" }} exact={true} > <li>Home</li></NavLink>
+                    <NavLink to="/bike_price" className="bike" activeStyle={{ color: "blue" }} ><li>Bike price</li></NavLink>
+                    <NavLink to="/brands" className="brands" activeStyle={{ color: "blue" }}><li>Brands</li></NavLink>
+                    <NavLink to="/helmets" className="helmet" activeStyle={{ color: "blue" }}><li>Helmet</li></NavLink>
+                    <NavLink to="/showrooms" className="showrooms" activeStyle={{ color: "blue" }}><li>Showrooms</li></NavLink>
+                    <NavLink to="/bike/scooter" className="scooter" activeStyle={{ color: "blue" }}><li>Scooter</li></NavLink>
+                    <NavLink to="/bikes/electric_bikes" className="ebikes" activeStyle={{ color: "blue" }}><li>Electric Bikes</li></NavLink>
+                    <NavLink to="/news" className="news" activeStyle={{ color: "blue" }}> <li>News,Offers & Travel Story</li></NavLink>
+                    <NavLink to="/comparison" className="compare" activeStyle={{ color: "blue" }}><li>Comparison</li></NavLink>
+                    <NavLink to="/contact" className="contact" activeStyle={{ color: "blue" }}><li>Contact us</li></NavLink>
                 </ul>
             </div>
 
