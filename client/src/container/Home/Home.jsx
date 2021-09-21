@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import CarouselSlider from '../../component/Carousel/CarouselSlider';
 import Layout from '../../component/Layout/Layout';
 import MultipleItems from '../../component/MultipleItem_Slider/MultipleItems';
@@ -11,10 +12,11 @@ function Home(props) {
                 <CarouselSlider />
                 <div className="container">
                     <h3
-                        style={{color:'black',textAlign:'center'}}
+                        style={{ color: 'black', textAlign: 'center' }}
                     >Choose bikes by
                     </h3>
-                    <MultipleItems/>
+
+
                 </div>
             </div>
         </Layout>

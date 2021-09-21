@@ -4,7 +4,6 @@ import Slider from "react-slick";
 const MultipleItems = () => {
 
     const settings = {
-        dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
@@ -12,7 +11,7 @@ const MultipleItems = () => {
     };
 
     return (
-        <div>
+        <div style={{padding:'20px'}}>
             <Slider {...settings}>
                 <div>
                     <h1>1</h1>
