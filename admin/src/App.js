@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { getAllNews, getBrands, getHelmetBrand } from './Actions';
 import HelmetBrand from './Container/Helmet brand/HelmetBrand';
 import News from './Container/News/News';
+import CreateBikes from './Container/Bike/Bikes/create.bikes';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
           <Route path="/helmets" exact component={Helmet} />
           <Route path="/helmets/brand" exact component={HelmetBrand} />
           <Route path="/news" exact component={News} />
+          <Route path="/create/bikes" exact component={CreateBikes}/>
         </Switch>
       </Router>
     </div>

@@ -3,19 +3,13 @@ const Bike = require('../Model/Bike');
 const slugify = require('slugify');
 
 exports.createBike = (req,res)=>{
-    let bikeImages =[];
-
-    if(req.files.length>0){
-        bikeImages = req.files.map((file)=>{
-            return { img : file.filename }
-        })
-    }
 
     const bikeObj = {
         name : req.body.name,
         slug : slugify(req.body.name),
         price : req.body.price,
         cc : req.body.cc,
+        category : req.body.category,
         availability : req.body.availability,
         displacement : req.body.displacement,
         engine_type : req.body.engine_type,
@@ -33,7 +27,7 @@ exports.createBike = (req,res)=>{
         overall_length : req.body.overall_length,
         overall_width :req.body.overall_width,
         weight : req.body.weight,
-        braking : req.body.braking,
+        wheelbase : req.body.wheelbase,
         chassis : req.body.chassis,
         front_brake : req.body.front_brake,
         rear_brake : req.body.rear_brake,
@@ -45,7 +39,6 @@ exports.createBike = (req,res)=>{
         wheel_type : req.body.wheel_type,
         mileage : req.body.mileage,
         topspped : req.body.topspped,
-        battery : req.body.battery,
         headlight : req.body.headlight,
         taillight : req.body.taillight,
         indicators : req.body.indicators,
@@ -55,10 +48,12 @@ exports.createBike = (req,res)=>{
         rpm_meter : req.body.rpm_meter,
         odo_meter : req.body.odo_meter,
         seat_type : req.body.seat_type,
-        category : req.body.category,
         brand : req.body.brand,
         description : req.body.description,
         bikeImages
+    }
+    if(req.file){
+        bikeObj.bikeImage = process.env.API_URL+'public/'+ req.file.filename;
     }
     const bike  = new Bike(bikeObj);
      bike.save((error,bike)=>{

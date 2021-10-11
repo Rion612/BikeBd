@@ -5,7 +5,6 @@ const bikeSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        lowercase: true
 
     },
     slug: {
@@ -19,6 +18,11 @@ const bikeSchema = mongoose.Schema({
     },
     cc: {
         type: String,
+        required: true
+    },
+    
+    category: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'BikeCategory',
         required: true
     },
     availability: {
@@ -89,7 +93,7 @@ const bikeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    braking: {
+    wheelbase: {
         type: String,
         required: true
     },
@@ -137,10 +141,6 @@ const bikeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    battery: {
-        type: String,
-        required: true
-    },
     headlight: {
         type: String,
         required: true
@@ -150,10 +150,6 @@ const bikeSchema = mongoose.Schema({
         required: true
     },
     indicators: {
-        type: String,
-        required: true
-    },
-    engine_skill_switch: {
         type: String,
         required: true
     },
@@ -177,10 +173,6 @@ const bikeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'BikeCategory',
-        required: true
-    },
     description:{
         type: String,
         required: true
@@ -189,9 +181,42 @@ const bikeSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'BikeBrand',
         required: true
     },
-    bikeImages: [
-        { img: { type: String } }
-    ],
+    bikeImage: {
+        type:String,
+        required:true
+    },
+    performance_score:{
+        type:String,
+        required:true
+    },
+    durability_score:{
+        type:String,
+        required:true
+    },
+    braking_score:{
+        type:String,
+        required:true
+    },
+    suspension_score:{
+        type:String,
+        required:true
+    },
+    milage_score:{
+        type:String,
+        required:true
+    },
+    features_score:{
+        type:String,
+        required:true
+    },
+    price_score:{
+        type:String,
+        required:true
+    },
+    service_score:{
+        type:String,
+        required:true
+    },
 
 }, { timestamps: true });
 
