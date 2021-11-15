@@ -6,7 +6,9 @@ const initState={
     helmets :[]
 }
 
+const makeUpdate=(hetmets,h)=>{
 
+}
 
 export default (state = initState,action)=>{
     switch(action.type){
@@ -24,6 +26,27 @@ export default (state = initState,action)=>{
             }
             break;
         case helmetConstants.GET_HELMET_FAILURE:
+            state={
+                ...state,
+                error : action.payload.message
+            }
+            break;
+        case helmetConstants.ADD_HELMET_REQUEST:
+            state={
+                ...state,
+                loading:true
+            }
+            break;
+        case helmetConstants.ADD_HELMET_SUCCESS:
+            const Helmet = action.payload.helmet;
+            const updateHelmets = makeUpdate(state.helmets,Helmet)
+            state={
+                ...state,
+                helmets : updateHelmets,
+                loading:false
+            }
+            break;
+        case helmetConstants.ADD_HELMET_FAILURE:
             state={
                 ...state,
                 error : action.payload.message

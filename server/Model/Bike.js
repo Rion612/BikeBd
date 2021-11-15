@@ -183,7 +183,6 @@ const bikeSchema = mongoose.Schema({
     },
     bikeImage: {
         type:String,
-        required:true
     },
     performance_score:{
         type:String,

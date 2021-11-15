@@ -39,7 +39,7 @@ router.post('/delete/bike/category',deleteCategory);
 router.post('/edit/bike/category',upload.single('categoryImage'),editCategory);
 router.get('/get/bike/categories',getBikeCategory);
 
-router.post('/create/bike',upload.single('bikeImages'),createBike);
+router.post('/create/bike',upload.single('bikeImage'),createBike);
 router.get('/get/all/bikes');
 
 

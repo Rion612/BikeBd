@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import './style.css'
 import { getCategory } from '../../../Actions/category.actions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from '../../../helpers/axios';
 
 
 const CreateBikes = () => {
@@ -14,7 +17,8 @@ const CreateBikes = () => {
     }, []);
     const bikeCategories = useSelector(state => state.category.categories);
     const bikeBrands = useSelector(state => state.brand.brands);
-    const createBikeSubmit = () => {
+    const createBikeSubmit = async (event) => {
+        event.preventDefault();
         const form = new FormData();
         form.append("name", name);
         form.append("price", price);
@@ -69,62 +73,77 @@ const CreateBikes = () => {
         form.append("price_score", price_score);
         form.append("service_score", service_score);
 
-        for (var value of form.values()) {
-            console.log(value);
+        for (var key of form.entries()) {
+            console.log(key[0] + ', ' + key[1])
         }
 
-        setName("");
-        setPrice("");
-        setCc("");
-        setAvailability("");
-        setCategory("");
-        setDisplacement("");
-        setEngine_type("");
-        setMax_power("");
-        setMax_torque("");
-        setGears("");
-        setClutch("");
-        setEngine_cooling("");
-        setFuel_supply("");
-        setStarting_method("");
-        setTransmission_type("");
-        setTank_capacity("");
-        setGround_clearance("");
-        setHeight("");
-        setOverall_length('');
-        setOverall_width("");
-        setWeight("");
-        setWheelbase("");
-        setChassis("");
-        setFront_brake("");
-        setRear_brake("");
-        setFront_suspension("");
-        setRear_suspension("");
-        setFront_tyre("");
-        setRear_tyre("");
-        setTyre_type("");
-        setWheel_type("");
-        setMileage("");
-        setTopspped("");
-        setHeadlight("");
-        setTaillight("");
-        setIndicators("");
-        setHandletype("");
-        setSpeedometer("");
-        setRpm_meter("");
-        setOdo_meter("");
-        setSeat_type("");
-        setDescription("");
-        setBrand("");
-        setBikeImage("");
-        setPerformance_score(0);
-        setDurability_score(0);
-        setBraking_score(0);
-        setSuspension_score(0);
-        setMilage_score(0);
-        setFeatures_score(0);
-        setPrice_score(0);
-        setService_score(0);
+        await axios.post('/create/bike', form)
+            .then((res) => {
+                if (res.status === 201) {
+                    toast.success("Succesfully bike created!");
+                    setName("");
+                    setPrice("");
+                    setCc("");
+                    setAvailability("");
+                    setCategory("");
+                    setDisplacement("");
+                    setEngine_type("");
+                    setMax_power("");
+                    setMax_torque("");
+                    setGears("");
+                    setClutch("");
+                    setEngine_cooling("");
+                    setFuel_supply("");
+                    setStarting_method("");
+                    setTransmission_type("");
+                    setTank_capacity("");
+                    setGround_clearance("");
+                    setHeight("");
+                    setOverall_length('');
+                    setOverall_width("");
+                    setWeight("");
+                    setWheelbase("");
+                    setChassis("");
+                    setFront_brake("");
+                    setRear_brake("");
+                    setFront_suspension("");
+                    setRear_suspension("");
+                    setFront_tyre("");
+                    setRear_tyre("");
+                    setTyre_type("");
+                    setWheel_type("");
+                    setMileage("");
+                    setTopspped("");
+                    setHeadlight("");
+                    setTaillight("");
+                    setIndicators("");
+                    setHandletype("");
+                    setSpeedometer("");
+                    setRpm_meter("");
+                    setOdo_meter("");
+                    setSeat_type("");
+                    setDescription("");
+                    setBrand("");
+                    setBikeImage("");
+                    setPerformance_score("");
+                    setDurability_score("");
+                    setBraking_score("");
+                    setSuspension_score("");
+                    setMilage_score("");
+                    setFeatures_score("");
+                    setPrice_score("");
+                    setService_score("");
+                }
+                else {
+                    toast.error("Bike created failed!");
+                }
+
+            })
+            .catch((error) => {
+                toast.error(error.message);
+
+            });
+
     }
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -170,20 +189,21 @@ const CreateBikes = () => {
     const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
     const [bikeImage, setBikeImage] = useState("");
-    const [performance_score, setPerformance_score] = useState(0);
-    const [durability_score, setDurability_score] = useState(0);
-    const [braking_score, setBraking_score] = useState(0);
-    const [suspension_score, setSuspension_score] = useState(0);
-    const [milage_score, setMilage_score] = useState(0);
-    const [features_score, setFeatures_score] = useState(0);
-    const [price_score, setPrice_score] = useState(0);
-    const [service_score, setService_score] = useState(0);
+    const [performance_score, setPerformance_score] = useState();
+    const [durability_score, setDurability_score] = useState();
+    const [braking_score, setBraking_score] = useState();
+    const [suspension_score, setSuspension_score] = useState();
+    const [milage_score, setMilage_score] = useState();
+    const [features_score, setFeatures_score] = useState();
+    const [price_score, setPrice_score] = useState();
+    const [service_score, setService_score] = useState();
     return (
         <div className="bike">
             <div className="title"><h3>Create bikes</h3></div>
             <div className="container">
                 <div className="container" style={{ marginTop: "50px" }}>
-                    <form>
+                    <ToastContainer />
+                    <form onSubmit={createBikeSubmit}>
                         <h6 className="formTitle">Basic details</h6>
                         <div className="inputGroup">
                             <div>
@@ -361,158 +381,159 @@ const CreateBikes = () => {
                             </div>
 
                         </div>
+
+                        <h6 className="formTitle">Top speed and Mileage</h6>
+                        <div className="inputGroup">
+                            <div>
+                                <input type="text" className="form-control" placeholder="Mileage (Average)"
+                                    value={mileage} onChange={(e) => setMileage(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Top Speed"
+                                    value={topspped} onChange={(e) => setTopspped(e.target.value)} />
+                            </div>
+
+                        </div>
+                        <h6 className="formTitle">Electricals</h6>
+                        <div className="inputGroup">
+                            <div>
+                                <select className="form-select" value={headlight} onChange={(e) => setHeadlight(e.target.value)}>
+                                    <option selected>Select headlight type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Halogen">Halogen</option>
+                                    <option value="HID">HID</option>
+                                    <option value="LED">LED</option>
+                                    <option value="Laser">Laser</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select className="form-select" value={taillight} onChange={(e) => setTaillight(e.target.value)}>
+                                    <option selected>Select taillight type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Halogen">Halogen</option>
+                                    <option value="HID">HID</option>
+                                    <option value="LED">LED</option>
+                                    <option value="Laser">Laser</option>
+                                    <option value="Bulb">Bulb</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select className="form-select" value={indicators} onChange={(e) => setIndicators(e.target.value)}>
+                                    <option selected>Select indicator type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Halogen">Halogen</option>
+                                    <option value="HID">HID</option>
+                                    <option value="LED">LED</option>
+                                    <option value="Laser">Laser</option>
+                                    <option value="Bulb">Bulb</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <h6 className="formTitle">Features</h6>
+                        <div className="inputGroup">
+                            <div>
+                                <select className="form-select" value={handletype} onChange={(e) => setHandletype(e.target.value)}>
+                                    <option selected>Select handle type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Convention Scooter">Convention Scooter</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select className="form-select" value={speedometer} onChange={(e) => setSpeedometer(e.target.value)}>
+                                    <option selected>Speedometer type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Digital">Digital</option>
+                                    <option value="Analog">Analog</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select className="form-select" value={rpm_meter} onChange={(e) => setRpm_meter(e.target.value)}>
+                                    <option selected>RPM meter type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Digital">Digital</option>
+                                    <option value="Analog">Analog</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select className="form-select" value={odo_meter} onChange={(e) => setOdo_meter(e.target.value)}>
+                                    <option selected>Odometer type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Digital">Digital</option>
+                                    <option value="Analog">Analog</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select className="form-select" value={seat_type} onChange={(e) => setSeat_type(e.target.value)}>
+                                    <option selected>Seat type</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Split">Split</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <h6 className="formTitle">Overall Score and other things</h6>
+                        <div className="inputGroup">
+                            <div>
+                                <input type="text" className="form-control" placeholder="Performance score"
+                                    value={performance_score} onChange={(e) => setPerformance_score(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Durability score"
+                                    value={durability_score} onChange={(e) => setDurability_score(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Braking score"
+                                    value={braking_score} onChange={(e) => setBraking_score(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Suspension score"
+                                    value={suspension_score} onChange={(e) => setSuspension_score(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Milage score"
+                                    value={milage_score} onChange={(e) => setMilage_score(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Features score"
+                                    value={features_score} onChange={(e) => setFeatures_score(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Price score"
+                                    value={price_score} onChange={(e) => setPrice_score(e.target.value)} />
+                            </div>
+                            <div>
+                                <input type="text" className="form-control" placeholder="Service center score"
+                                    value={service_score} onChange={(e) => setService_score(e.target.value)} />
+                            </div>
+
+                        </div>
+                        <div className="Otherthings">
+                            <select className="form-select" value={brand}
+                                onChange={(e) => setBrand(e.target.value)}>
+                                <option selected>Select bike's brand</option>
+                                {
+                                    bikeBrands?.map((item, index) => {
+                                        return (
+                                            <option value={item?._id}>{item?.name}</option>
+                                        )
+                                    })
+
+                                }
+
+                            </select>
+                            <textarea placeholder="Bike's description" value={description}
+                                onChange={(e) => setDescription(e.target.value)} />
+                            <div>
+                                <label>Select bike image:</label>
+                                <input type="file" name="bikeImage" onChange={(e) => setBikeImage(e.target.files[0])} />
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <button className="bikeFormSubmit">Create bike</button>
+                        </div>
                     </form>
-                    <h6 className="formTitle">Top speed and Mileage</h6>
-                    <div className="inputGroup">
-                        <div>
-                            <input type="text" className="form-control" placeholder="Mileage (Average)"
-                                value={mileage} onChange={(e) => setMileage(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="text" className="form-control" placeholder="Top Speed"
-                                value={topspped} onChange={(e) => setTopspped(e.target.value)} />
-                        </div>
-
-                    </div>
-                    <h6 className="formTitle">Electricals</h6>
-                    <div className="inputGroup">
-                        <div>
-                            <select className="form-select" value={headlight} onChange={(e) => setHeadlight(e.target.value)}>
-                                <option selected>Select headlight type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Halogen">Halogen</option>
-                                <option value="HID">HID</option>
-                                <option value="LED">LED</option>
-                                <option value="Laser">Laser</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select className="form-select" value={taillight} onChange={(e) => setTaillight(e.target.value)}>
-                                <option selected>Select taillight type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Halogen">Halogen</option>
-                                <option value="HID">HID</option>
-                                <option value="LED">LED</option>
-                                <option value="Laser">Laser</option>
-                                <option value="Bulb">Bulb</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select className="form-select" value={indicators} onChange={(e) => setIndicators(e.target.value)}>
-                                <option selected>Select indicator type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Halogen">Halogen</option>
-                                <option value="HID">HID</option>
-                                <option value="LED">LED</option>
-                                <option value="Laser">Laser</option>
-                                <option value="Bulb">Bulb</option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <h6 className="formTitle">Features</h6>
-                    <div className="inputGroup">
-                        <div>
-                            <select className="form-select" value={handletype} onChange={(e) => setHandletype(e.target.value)}>
-                                <option selected>Select handle type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Convention Scooter">Convention Scooter</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select className="form-select" value={speedometer} onChange={(e) => setSpeedometer(e.target.value)}>
-                                <option selected>Speedometer type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Digital">Digital</option>
-                                <option value="Analog">Analog</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select className="form-select" value={rpm_meter} onChange={(e) => setRpm_meter(e.target.value)}>
-                                <option selected>RPM meter type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Digital">Digital</option>
-                                <option value="Analog">Analog</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select className="form-select" value={odo_meter} onChange={(e) => setOdo_meter(e.target.value)}>
-                                <option selected>Odometer type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Digital">Digital</option>
-                                <option value="Analog">Analog</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select className="form-select" value={seat_type} onChange={(e) => setSeat_type(e.target.value)}>
-                                <option selected>Seat type</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Single">Single</option>
-                                <option value="Split">Split</option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <h6 className="formTitle">Overall Score and other things</h6>
-                    <div className="inputGroup">
-                        <div>
-                            <input type="number" className="form-control" placeholder="Performance score"
-                                value={performance_score} onChange={(e) => setPerformance_score(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="number" className="form-control" placeholder="Durability score"
-                                value={durability_score} onChange={(e) => setDurability_score(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="number" className="form-control" placeholder="Braking score"
-                                value={braking_score} onChange={(e) => setBraking_score(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="number" className="form-control" placeholder="Suspension score"
-                                value={suspension_score} onChange={(e) => setSuspension_score(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="number" className="form-control" placeholder="Milage score"
-                                value={milage_score} onChange={(e) => setMilage_score(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="number" className="form-control" placeholder="Features score"
-                                value={features_score} onChange={(e) => setFeatures_score(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="number" className="form-control" placeholder="Price score"
-                                value={price_score} onChange={(e) => setPrice_score(e.target.value)} />
-                        </div>
-                        <div>
-                            <input type="number" className="form-control" placeholder="Service center score"
-                                value={service_score} onChange={(e) => setService_score(e.target.value)} />
-                        </div>
-
-                    </div>
-                    <div className="Otherthings">
-                        <select className="form-select" value={brand}
-                            onChange={(e) => setBrand(e.target.value)}>
-                            <option selected>Select bike's brand</option>
-                            {
-                                bikeBrands?.map((item, index) => {
-                                    return (
-                                        <option value={item?._id}>{item?.name}</option>
-                                    )
-                                })
-
-                            }
-
-                        </select>
-                        <textarea placeholder="Bike's description" value={description}
-                            onChange={(e) => setDescription(e.target.value)} />
-                        <div>
-                            <label for="myfile">Select bike image:</label>
-                            <input type="file" id="myfile" name="bikeImage" onChange={(e) => setBikeImage(e.target.files[0])} />
-                        </div>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <button className="bikeFormSubmit" onClick={createBikeSubmit}>Create bike</button>
-                    </div>
 
                 </div>
 

@@ -50,7 +50,15 @@ exports.createBike = (req,res)=>{
         seat_type : req.body.seat_type,
         brand : req.body.brand,
         description : req.body.description,
-        bikeImages
+        performance_score:req.body.performance_score,
+        durability_score:req.body.durability_score,
+        braking_score:req.body.braking_score,
+        suspension_score:req.body.suspension_score,
+        milage_score:req.body.milage_score,
+        features_score:req.body.features_score,
+        price_score:req.body.price_score,
+        service_score:req.body.service_score,      
+
     }
     if(req.file){
         bikeObj.bikeImage = process.env.API_URL+'public/'+ req.file.filename;
