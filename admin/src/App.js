@@ -10,7 +10,6 @@ import Brand from './Container/Bike/Brand/brand';
 import Ctaegory from './Container/Bike/Category/category';
 import Header from './Component/Header/Header';
 import Showroom from './Container/Showroom/Showroom';
-import dashboard from './Container/Dashboard/dashboard';
 import Helmet from './Container/Helmet/Helmet';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -18,6 +17,7 @@ import { getAllNews, getBrands, getHelmetBrand } from './Actions';
 import HelmetBrand from './Container/Helmet brand/HelmetBrand';
 import News from './Container/News/News';
 import CreateBikes from './Container/Bike/Bikes/create.bikes';
+import Dashboard from './Container/Dashboard/dashboard';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path="/" exact component={dashboard} />
+          <Route path="/" exact component={Dashboard} />
           <Route path="/bike" exact component={Bike} />
           <Route path="/bike/brand" exact component={Brand} />
           <Route path="/bike/category" exact component={Ctaegory} />

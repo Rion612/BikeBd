@@ -12,16 +12,26 @@
   .flex-container > div {
     width: 300px;
     height: 200px;
-    background-color: #232b64;
     margin: 10px;
-    padding: 20px;
-    font-size: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.9);
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
     transition: 0.3s;
     color: #fff;
   }
   .flex-container > div:hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  .box1{
+    background-color: #42a5f5;
+  }
+  .box2{
+    background-color: #7e57c2;
+  }
+  .box3{
+    background-color: #ef5350;
+  }
+  .box4{
+    background-color:#26c6da;
   }
   @media (max-width: 600px) {
     .flex-container {

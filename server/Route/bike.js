@@ -9,7 +9,7 @@ const
 const multer = require('multer');
 const shortid =require('shortid');
 const path =require('path');
-const { createBike } = require('../Controller/bike');
+const { createBike, getALLBikes } = require('../Controller/bike');
 const { createBikeBrand,getBikeBrand, editBrand, deleteBrand } = require('../Controller/bikeBrand');
 
 
@@ -40,7 +40,7 @@ router.post('/edit/bike/category',upload.single('categoryImage'),editCategory);
 router.get('/get/bike/categories',getBikeCategory);
 
 router.post('/create/bike',upload.single('bikeImage'),createBike);
-router.get('/get/all/bikes');
+router.get('/get/all/bikes',getALLBikes);
 
 
 
