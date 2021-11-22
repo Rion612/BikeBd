@@ -12,14 +12,14 @@ function Header() {
     return (
         <>
             <IconContext.Provider value={{color:'#fff'}}>
-                <div className="navbar">
+                <div className="navbar" style={{zIndex:'1000'}}>
                     <Link to="#" className="menu-bars">
                         <FaBars onClick={showSideBar} />
 
                     </Link>
                     <h3 className="text">Admin Dashboard</h3>
                 </div>
-                <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+                <nav className={sidebar ? 'nav-menu active' : 'nav-menu'} style={{zIndex:'1000'}}>
                     <ul className="nav-menu-items" onClick={showSideBar}>
                         <li className="navbar-toggle">
                             <Link to="#">
