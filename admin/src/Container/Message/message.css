@@ -1,0 +1,52 @@
+.read{
+    color: grey;
+}
+.unread{
+    color:black;
+    font-weight: bold;
+}
+.replyButton{
+    cursor: pointer;
+}
+.mailDiv{
+    display: flex;
+    background-color: #f2f9fb;
+    min-height: 100vh;
+    width: 100%;
+}
+.mailList{
+    border-right: 5px solid #fff;
+    min-height: 100vh;
+    width: 40%;
+    padding: 15px;
+    overflow: scroll;
+}
+.mailDetails{
+    border-left: 3px solid #fff;
+    min-height: 100vh;
+    padding: 20px;
+    width: 60%;
+}
+.searchInput{
+    border: none;
+    outline: none;
+    width: 100%;
+}
+.searchBox{
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+.singleMail{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.singleMail:hover{
+    background-color: #7e64f6 ;
+    transition: 0.3s;
+    color: #fff;
+}

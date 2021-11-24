@@ -5,6 +5,7 @@ import { AiOutlineDashboard,AiOutlineShop } from "react-icons/ai";
 import { RiMotorbikeFill } from "react-icons/ri";
 import { SiBrandfolder } from 'react-icons/si';
 import { GiFullMotorcycleHelmet } from 'react-icons/gi';
+import {GrMail} from 'react-icons/gr'
 
 import { BiNews } from 'react-icons/bi';
 export const sidebarData = [
@@ -55,6 +56,12 @@ export const sidebarData = [
         title :'News',
         path :'/news',
         icon :<BiNews/>,
+        cName :'nav-text'
+    },
+    {
+        title :'Inbox',
+        path :'/user/message',
+        icon :<GrMail/>,
         cName :'nav-text'
     }
 
