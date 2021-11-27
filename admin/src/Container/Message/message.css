@@ -22,7 +22,7 @@
     border-right: 5px solid #fff;
     width: 40%;
     padding: 15px;
-    height: 700px;
+    height: 400px;
     overflow-y:scroll;
     overflow-x:hidden;
 }
@@ -69,4 +69,21 @@
     background-color: #7e64f6 ;
     transition: 0.3s;
     color: #fff;
+}
+.replyButton{
+    padding: 5px 25px;
+    border: none;
+    background-color: rgb(9, 26, 122);
+    color: #fff;
+    cursor: pointer;
+}
+.replyButton:hover{
+    opacity: 0.8;
+}
+.deleteButton{
+    cursor: pointer;
+}
+.deleteButton:hover{
+    opacity: 0.7;
+    transition: 0.3s;
 }
