@@ -93,3 +93,28 @@ exports.setStatusTrue = (req, res) => {
         });
     }
 }
+exports.deleteMessage= (req, res) => {
+    try {
+        Contact.findOneAndDelete({ _id: req.body._id })
+        .exec((error, data) => {
+            if (error) {
+                return res.status(400).json({
+                    message: "Something Wrong"
+                });
+            }
+            else if (data) {
+
+                return res.status(200).json(
+                    { message: "Message is deleted successfully" }
+                );
+            }
+
+        })
+        
+    } catch (error) {
+        return res.status(400).json({
+            message: "Something Wrong"
+        });
+    }
+    
+}
