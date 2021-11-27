@@ -3,7 +3,7 @@ const Contact = require('../Model/Contact');
 
 
 exports.createMessage = (req, res) => {
-    const { fullname, email,subject,message } = req.body;
+    const { fullname, email, subject, message } = req.body;
     const date = Date.now().toString();
     try {
         const obj = {
@@ -50,6 +50,46 @@ exports.getAllMessage = (req, res) => {
     } catch (error) {
         return res.status(400).json({
             error
-        }) 
+        })
+    }
+}
+exports.setStatusTrue = (req, res) => {
+    try {
+        const updateObj = {};
+        updateObj.status = true;
+        Contact.findOneAndUpdate({ _id: req.body._id }, {
+            "$set": updateObj,
+            "$currentDate": { lastModified: true }
+        }).exec((error, result) => {
+            if (error) {
+                return res.status(400).json({
+                    message: "Something Wrong"
+                });
+            } else {
+                Contact.findOne({ _id: result._id })
+                    .exec((error, data) => {
+                        if (error) {
+                            return res.status(400).json({
+                                message: "Something Wrong"
+                            });
+                        }
+                        else if (data) {
+
+                            return res.status(200).json(
+                                { data }
+                            );
+                        }
+
+                    })
+            }
+        })
+
+
+
+    } catch (error) {
+        return res.status(400).json({
+            message: "Something Wrong",
+            error: error
+        });
     }
 }

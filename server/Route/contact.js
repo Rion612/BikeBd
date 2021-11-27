@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const shortid = require('shortid');
 const path = require('path');
-const { createMessage, getAllMessage } = require('../Controller/contact');
+const { createMessage, getAllMessage, setStatusTrue } = require('../Controller/contact');
 
 
 const router = express.Router();
@@ -19,6 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 router.post('/create/message', createMessage);
 router.get('/get/all/messages',getAllMessage);
+router.post('/set/status/true',setStatusTrue);
 
 
 
