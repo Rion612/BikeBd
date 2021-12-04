@@ -6,21 +6,13 @@ import { Row, Col, Card,Table } from 'react-bootstrap';
 import './brandHelmet.css'
 
 const BrandHelmet = (props) => {
-    const [brandLists, setBrandLists] = useState([]);
     const [error, setError] = useState("");
-
-    useEffect(async () => {
-        try {
-            const res = await axios.get(`/get/helmet/${props.match.params.slug}`);
-            setBrandLists(res.data.helmets);
-        } catch (err) {
-            setError("Something wrong!");
-        }
-    }, []);
 
     const brands = useSelector(state => state.helmetBrands.helmetBrands);
     const brand = brands.find(x => x.slug === props.match.params.slug);
-
+    const helmet = useSelector(state=>state.helmets.helmets);
+    const helmets = helmet.filter(x=>x.brand === brand._id);
+    console.log(helmet)
     return (
         <div>
             <Layout>
@@ -31,7 +23,7 @@ const BrandHelmet = (props) => {
 
                     <div className="title"><h2>{brand?.name} Helmet Price In Bangladesh</h2></div>
                     <Row>
-                        {brandLists.map((item, index) => {
+                        {helmets.map((item, index) => {
                             return (
                                 <Col md={4} key={index} >
                                     <div className="brandNameDiv">{(item.name).toUpperCase()}</div>
