@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const shortid = require('shortid');
 const path = require('path');
-const { createMessage, getAllMessage, setStatusTrue, deleteMessage } = require('../Controller/contact');
+const { createMessage, getAllMessage, setStatusTrue, deleteMessage, sendMail } = require('../Controller/contact');
 
 
 const router = express.Router();
@@ -21,6 +21,7 @@ router.post('/create/message', createMessage);
 router.get('/get/all/messages',getAllMessage);
 router.post('/set/status/true',setStatusTrue);
 router.post('/delete/message', deleteMessage);
+router.post('/send/mail',sendMail);
 
 
 

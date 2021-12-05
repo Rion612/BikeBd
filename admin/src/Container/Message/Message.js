@@ -4,6 +4,8 @@ import axios from '../../helpers/axios';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { RiDeleteBin5Fill } from 'react-icons/ri'
 import { ToastContainer, toast } from 'react-toastify';
+import { FiSend } from 'react-icons/fi';
+import { AiOutlineClose } from 'react-icons/ai'
 import 'react-toastify/dist/ReactToastify.css';
 import './message.css';
 
@@ -11,6 +13,11 @@ const Message = (props) => {
     const [messages, setMessages] = useState([]);
     const [mailContent, setMailContent] = useState({});
     const [state, setState] = useState(false);
+    const [searchItem, setSearchItem] = useState("");
+    const [sentMailState, setSentMailState] = useState(false);
+    const [emailMessage, setEmailMessage] = useState("");
+    const [mailto, setMailTo] = useState("");
+    const [mailSubject, setMailSubject] = useState("");
     useEffect(async () => {
         const res = await axios.get('/get/all/messages');
         if (res.status == 200) {
@@ -25,6 +32,7 @@ const Message = (props) => {
             }
         }
         setMailContent(mail);
+        setMailTo(mail.email);
     }
     const dateFormation = (date) => {
         const d = new Date(parseInt(date));
@@ -35,15 +43,33 @@ const Message = (props) => {
         }
         return obj;
     }
-    const deleteMessage = async(item) =>{
-        const delete_response = await axios.post('/delete/message',{_id : item._id});
-        if(delete_response.status == 200){
+    const deleteMessage = async (item) => {
+        const delete_response = await axios.post('/delete/message', { _id: item._id });
+        if (delete_response.status == 200) {
             toast.success(delete_response.data.message);
             setState(!state);
             setMailContent({});
         }
-        else{
-            toast.error(delete_response.data.message);  
+        else {
+            toast.error(delete_response.data.message);
+        }
+    }
+    const stateChangeOfSentMail = () => {
+        setSentMailState(!sentMailState);
+    }
+    const sendEmail = async() =>{
+        const mailOptions = {
+            mailto,
+            subject: mailSubject,
+            message: emailMessage
+        }
+        const mailSentResponse = await axios.post('/send/mail', mailOptions);
+        if(mailSentResponse.status == 200){
+            toast.success(mailSentResponse.data.message);
+            setEmailMessage("");
+            setMailSubject("");
+        }else {
+            toast.error("Something went wrong! Please try again later.");
         }
     }
     return (
@@ -54,11 +80,20 @@ const Message = (props) => {
                 <div className="mailDiv">
                     <div className="mailList">
                         <div className="searchBox">
-                            <input type="text" placeholder="Search mail.." className="searchInput" />
+                            <input type="text" placeholder="Search mail.." className="searchInput"
+                                value={searchItem}
+                                onChange={(e) => setSearchItem(e.target.value)} />
                             <img src={process.env.PUBLIC_URL + '/search.png'} height="40px" width="40px" />
                         </div>
                         {
-                            messages.map((item, index) => {
+                            [...messages].reverse().filter((val) => {
+                                if (searchItem == "") {
+                                    return val;
+                                }
+                                else if (val.email.toLowerCase().includes(searchItem.toLowerCase())) {
+                                    return val;
+                                }
+                            }).map((item, index) => {
                                 const date = dateFormation(item?.date);
                                 return (
                                     <div className={item.status ? 'singleReadMail' : 'singleUnreadMail'} key={index} onClick={() => contentChange(item)}>
@@ -97,7 +132,7 @@ const Message = (props) => {
                                             <h3>{mailContent?.subject}</h3>
                                         </div>
                                         <div>
-                                            <RiDeleteBin5Fill size={30} color="red" className="deleteButton" onClick={()=>deleteMessage(mailContent)} />
+                                            <RiDeleteBin5Fill size={30} color="red" className="deleteButton" onClick={() => deleteMessage(mailContent)} />
                                         </div>
                                     </div>
                                     <div>
@@ -109,9 +144,40 @@ const Message = (props) => {
                                         <p>{mailContent.message}</p>
                                     </div>
                                     <div>
-                                        <button className="replyButton">
-                                            Reply
-                                        </button>
+                                        {
+                                            sentMailState ?
+                                                <button className="replyButton" onClick={stateChangeOfSentMail}>
+                                                    Close <AiOutlineClose/>
+                                                </button>
+                                                :
+                                                <button className="replyButton" onClick={stateChangeOfSentMail}>
+                                                    Reply
+                                                </button>
+                                        }
+
+                                    </div>
+                                    <div className={sentMailState ? 'sentMailBoxShow' : 'sentMailBoxHide'}>
+                                        <div>
+                                            <p>To: <input type="text" value={mailto}
+                                                style={{ width: '100%', padding: '10px' }}
+                                            />
+                                            </p>
+
+                                        </div>
+                                        <div>
+                                        <input type="text" placeholder="Subject" value={mailSubject} onChange={(e)=>setMailSubject(e.target.value)}
+                                                style={{ width: '100%', padding: '10px' }}
+                                            />
+                                        </div>
+                                        <div>
+                                        <textarea type="text" placeholder="Your message" rows="8" value={emailMessage}
+                                                onChange={(e)=>setEmailMessage(e.target.value)}
+                                                style={{ width: '100%', padding: '10px',marginTop:'20px' }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <button className="sendButton" onClick={sendEmail}>Send <FiSend /></button>
+                                        </div>
                                     </div>
                                 </div>
                         }

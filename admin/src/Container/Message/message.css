@@ -87,3 +87,20 @@
     opacity: 0.7;
     transition: 0.3s;
 }
+.sentMailBoxShow{
+    display: block;
+    margin-top: 50px;
+}
+.sentMailBoxHide{
+    display: none;
+    margin-top: 50px;
+}
+.sendButton{
+    padding: 5px 25px;
+    border: none;
+    background-color: rgb(9, 26, 122);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
