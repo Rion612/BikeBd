@@ -39,7 +39,6 @@ const makeUpdate2 = (brands, id) => {
 
 }
 export default (state = initialState, action) => {
-    console.log(action);
     switch (action.type) {
         case brandConstants.GET_BRAND_REQUEST:
             state = {

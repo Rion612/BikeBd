@@ -10,32 +10,25 @@ const News = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllNews());
-    }, [])
-    const news = useSelector(state => state.news.news);
+    }, []);
+    const news = useSelector(state => state.news);
     const [toggleState, setToggleState] = useState(1);
     const [data, setData] = useState([]);
     const toggleTab = (index) => {
-        console.log(index);
         setToggleState(index);
         if (index === 1) {
-            let d = news.filter(x => x.category === "news");
+            let d = news.news.filter(x => x.category === "news");
             setData(d.reverse());
-            console.log(data)
-
         }
         else if (index === 2) {
-            let d = news.filter(x => x.category === "offer");
+            let d = news.news.filter(x => x.category === "offer");
             setData(d.reverse());
-            console.log(d)
         }
         else if (index === 3) {
-            let d = news.filter(x => x.category === "travel_story");
+            let d = news.news.filter(x => x.category === "travel_story");
             setData(d.reverse());
-            console.log(d)
         }
     };
-
-
     return (
         <div>
             <Layout>
@@ -53,10 +46,10 @@ const News = () => {
                         <Col className={toggleState === 3 ? "tab active-tabs" : "tab"} onClick={() => toggleTab(3)}>Travel Story</Col>
                     </Row>
                     <Row>
-                        <Col >
+                        <Col>
                             {
                                 toggleState === 1 ?
-                                    news.filter(x => x.category === "news").map((item, index) => {
+                                    news.news.filter(x => x.category === "news").map((item, index) => {
                                         return (
                                             <Row id="tabDiv" key={index}>
                                                 <Col md={4}><img src={item?.NewsImage} width="300px" height="200px" /></Col>
