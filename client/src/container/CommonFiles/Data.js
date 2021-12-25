@@ -95,4 +95,24 @@ export const ccData = [
         image: process.env.PUBLIC_URL+"/cc.jpg",
         value: 500 
     },
+];
+export const mileageData = [
+    {
+        value: "70"
+    },
+    {
+        value: "60"
+    },
+    {
+        value: "50"
+    },
+    {
+        value: "40"
+    },
+    {
+        value: "30"
+    },
+    {
+        value: "20"
+    }
 ]

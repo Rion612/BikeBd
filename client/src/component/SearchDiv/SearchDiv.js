@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { mileageData,ccData, budgetData  } from '../../container/CommonFiles/Data';
 
 const SearchDiv = () => {
     const brands = useSelector(state => state.brand.brands);
@@ -14,10 +15,11 @@ const SearchDiv = () => {
                 </div>
                 <div style={{ width: '70%' }}>
                     <select className='form-control'>
+                        <option>Any Brand</option>
                         {
                             brands.map((item, index) => {
                                 return (
-                                    <option>{item.name}</option>
+                                    <option key={index}>{item.name}</option>
                                 )
                             })
                         }
@@ -30,10 +32,11 @@ const SearchDiv = () => {
                 </div>
                 <div style={{ width: '70%' }}>
                     <select className='form-control'>
+                        <option>Any CC</option>
                         {
-                            brands.map((item, index) => {
+                            ccData.slice(0,8).map((item, index) => {
                                 return (
-                                    <option>{item.name}</option>
+                                    <option key={index}>{item.value}{'cc'}</option>
                                 )
                             })
                         }
@@ -46,10 +49,11 @@ const SearchDiv = () => {
                 </div>
                 <div style={{ width: '70%' }}>
                     <select className='form-control'>
+                        <option>Any Mileage</option>
                         {
-                            brands.map((item, index) => {
+                            mileageData.map((item, index) => {
                                 return (
-                                    <option>{item.name}</option>
+                                    <option key={index}>{item.value}{'+'+ ' '+'KM/L'}</option>
                                 )
                             })
                         }
@@ -62,10 +66,11 @@ const SearchDiv = () => {
                 </div>
                 <div style={{ width: '70%' }}>
                     <select className='form-control'>
+                        <option>Any Price</option>
                         {
-                            brands.map((item, index) => {
+                            budgetData.map((item, index) => {
                                 return (
-                                    <option>{item.name}</option>
+                                    <option key={index}>{item.minRange}{'-'}{item.maxRange}</option>
                                 )
                             })
                         }
