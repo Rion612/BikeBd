@@ -2,21 +2,21 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Layout from '../../component/Layout/Layout';
 import './brands.css'
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import FeatureBike from '../../component/FeatureBike/FeatureBike';
+import SearchDiv from '../../component/SearchDiv/SearchDiv';
 
 const Brands = () => {
     const brand = useSelector(state => state.brand);
-    const array = [1, 2, 3, 4, 5];
     return (
         <div>
             <Layout>
                 <div className="container">
                     <div style={{ display: 'flex', minHeight: '100vh' }}>
-                        <div style={{ width: "70%"}} className='p-2'>
+                        <div style={{ width: "70%" }} className='p-2'>
                             <div className='breadcumb'>
                                 <Link to={'/'} style={{ textDecoration: "none" }}>
                                     Home
@@ -53,7 +53,9 @@ const Brands = () => {
                             </Row>
                         </div>
                         <div style={{ display: "flex", flexDirection: 'column', width: '30%' }} className='p-2'>
-                            <FeatureBike/>
+                            <FeatureBike />
+                            <br />
+                            <SearchDiv/>
                         </div>
                     </div>
                 </div>
