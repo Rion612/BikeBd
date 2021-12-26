@@ -5,6 +5,7 @@ import showroomReducers from './showroom.reducers';
 import helmetReducers from './helmet.reducers'
 import helmetbrandReducers from './helemt.brand.reducers'
 import newsReducers from "./news.reducers";
+import bikesReducers from "./bikes.reducers"
 
 const rootReducer = combineReducers({
   category: categoryReducers,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   showroom : showroomReducers,
   helmets : helmetReducers,
   helmetBrands : helmetbrandReducers,
-  news : newsReducers
+  news : newsReducers,
+  bikes: bikesReducers
 
 });
 export default rootReducer;

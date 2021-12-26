@@ -90,6 +90,11 @@ export const helemtbrandConstants ={
 
 
 }
+export const bikesConstant = {
+  GET_ALL_BIKE_REQUEST : "GET_ALL_BIKE_REQUEST",
+  GET_ALL_BIKE_SUCCESS : "GET_ALL_BIKE_SUCCESS",
+  GET_ALL_BIKE_FAILURE : "GET_ALL_BIKE_FAILURE"
+}
 export const newsConstant = {
   GET_NEWS_REQUEST: "GET_NEWS_REQUEST",
   GET_NEWS_SUCCESS: "GET_NEWS_SUCCESS",

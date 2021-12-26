@@ -274,18 +274,24 @@ const CreateBikes = () => {
                                 <select className="form-select" value={engine_cooling} onChange={(e) => setEngine_cooling(e.target.value)}>
                                     <option selected>Select Engine cooling type</option>
                                     <option value="Liquid cooled">Liquid cooled</option>
+                                    <option value="Oil-Cooled">Oil-Cooled</option>
+                                    <option value="Air Cooled">Air Cooled</option>
                                 </select>
                             </div>
                             <div>
                                 <select className="form-select" value={fuel_supply} onChange={(e) => setFuel_supply(e.target.value)}>
                                     <option selected>Select Fuel Supply</option>
                                     <option value="Fuel injection">Fuel injection</option>
+                                    <option value="Carburetor (UCAL, CV)">Carburetor (UCAL, CV)</option>
+                                    <option value="Carburetor">Carburetor</option>
+                                    <option value="Carburetor, Fuel Injection">Carburetor, Fuel Injection</option>
                                 </select>
                             </div>
                             <div>
                                 <select className="form-select" value={starting_method} onChange={(e) => setStarting_method(e.target.value)}>
                                     <option selected>Starting method</option>
                                     <option value="Electric starter">Electric starter</option>
+                                    <option value="Kick & Electric starter">Kick & Electric starter</option>
                                 </select>
                             </div>
                             <div>
@@ -339,6 +345,9 @@ const CreateBikes = () => {
                                     <option value="N/A">N/A</option>
                                     <option value="Diamond frame">Diamond frame</option>
                                     <option value="Deltabox">Deltabox</option>
+                                    <option value="Double Cradle Split Synchro STIFF">Double Cradle Split Synchro STIFF</option>
+                                    <option value="Double Cradle">Double Cradle</option>
+                                    <option value="Single Downtube">Single Downtube</option>
                                 </select>
                             </div>
                             <div>
@@ -370,6 +379,7 @@ const CreateBikes = () => {
                                     <option selected>Tyre type</option>
                                     <option value="N/A">N/A</option>
                                     <option value="Tubeless">Tubeless</option>
+                                    <option value="Tube">Tube</option>
                                 </select>
                             </div>
                             <div>
@@ -437,6 +447,9 @@ const CreateBikes = () => {
                                     <option selected>Select handle type</option>
                                     <option value="N/A">N/A</option>
                                     <option value="Convention Scooter">Convention Scooter</option>
+                                    <option value="3-Part Handle Bar">3-Part Handle Bar</option>
+                                    <option value="Rod Handle Bar">Rod Handle Bar</option>
+                                    <option value="Pipe">Pipe</option>
                                 </select>
                             </div>
                             <div>
