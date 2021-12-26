@@ -4,10 +4,11 @@ import Layout from '../../component/Layout/Layout';
 import './brands.css'
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { AiOutlineDoubleRight } from "react-icons/ai";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import FeatureBike from '../../component/FeatureBike/FeatureBike';
 import SearchDiv from '../../component/SearchDiv/SearchDiv';
+import SideBarBrand from '../../component/SideBarBrand/sideBarBrand';
+import BreadcumCom from '../../component/BreadcumCom/BreadcumCom';
 
 const Brands = () => {
     const brand = useSelector(state => state.brand);
@@ -17,13 +18,7 @@ const Brands = () => {
                 <div className="container">
                     <div style={{ display: 'flex', minHeight: '100vh' }}>
                         <div style={{ width: "70%" }} className='p-2'>
-                            <div className='breadcumb'>
-                                <Link to={'/'} style={{ textDecoration: "none" }}>
-                                    Home
-                                </Link>
-                                <AiOutlineDoubleRight style={{ margin: "0 10px" }} />
-                                {'Brands'}
-                            </div>
+                            <BreadcumCom fTab="Home" sTab="Brands" route="/"/>
                             <div className='title'><h4>Motorcycle Brands in Bangladesh</h4></div>
                             <p className="paragraph">
                                 In this page we put all Motorcycle Brands in Bangladesh Price, Image,
@@ -55,7 +50,7 @@ const Brands = () => {
                         <div style={{ display: "flex", flexDirection: 'column', width: '30%' }} className='p-2'>
                             <FeatureBike />
                             <br />
-                            <SearchDiv/>
+                            <SearchDiv />
                         </div>
                     </div>
                 </div>

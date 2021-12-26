@@ -8,9 +8,6 @@ import { getAllNews } from '../../Actions';
 
 const News = () => {
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getAllNews());
-    }, []);
     const news = useSelector(state => state.news);
     const [toggleState, setToggleState] = useState(1);
     const [data, setData] = useState([]);
