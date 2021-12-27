@@ -5,22 +5,51 @@ import Layout from '../../component/Layout/Layout';
 import SearchDiv from '../../component/SearchDiv/SearchDiv';
 import SideBarBrand from '../../component/SideBarBrand/sideBarBrand';
 import { useSelector } from "react-redux";
+import { Table } from "react-bootstrap"
 import './Comparison.css';
 
 const Comparison = () => {
     const bikes = useSelector(state => state.bikes.bikes);
-    const [compare, setCompare] = useState(false);
+    const [compareButton, setCompareButton] = useState(false);
+    const [sameBike, setSameBike] = useState(false);
+    const [compareBikeOne, setCompareBikeOne] = useState({});
+    const [compareBikeTwo, setCompareBikeTwo] = useState({});
+    const [optionStateOne, setOptionStateOne] = useState("1");
+    const [optionStateTwo, setOptionStateTwo] = useState("1");
     const [compareImageLeft, setCompareImageLeft] = useState(process.env.PUBLIC_URL + '/compare_demo_left.PNG');
     const [compareImageRight, setCompareImageRight] = useState(process.env.PUBLIC_URL + '/compare_demo_right.PNG');
     useEffect(() => {
-        if ((compareImageLeft !== process.env.PUBLIC_URL + '/compare_demo_left.PNG') &&
-            (compareImageRight !== process.env.PUBLIC_URL + '/compare_demo_right.PNG')
-        ) {
-            setCompare(true);
-        }else{
-            setCompare(false)
+        if (optionStateOne !== "1" && optionStateTwo !== "1") {
+            if (optionStateOne === optionStateTwo) {
+                setCompareButton(false);
+                setSameBike(true);
+            } else {
+                setSameBike(false);
+                setCompareButton(true);
+            }
         }
-    }, [compareImageRight,compareImageLeft])
+        else {
+            setCompareButton(false)
+        }
+    }, [compareImageRight, compareImageLeft])
+    const leftSelectOption = (event) => {
+        setOptionStateOne(event.target.value);
+        if (event.target.value === "1") {
+            setCompareImageLeft(process.env.PUBLIC_URL + '/compare_demo_left.PNG');
+        } else {
+            const b = bikes.find(x => x._id === event.target.value);
+            setCompareImageLeft(b.bikeImage)
+        }
+    }
+    const RightSelectOption = (event) => {
+        setOptionStateTwo(event.target.value);
+        if (event.target.value === "1") {
+            setCompareImageRight(process.env.PUBLIC_URL + '/compare_demo_left.PNG');
+        } else {
+            const b = bikes.find(x => x._id === event.target.value);
+            setCompareImageRight(b.bikeImage)
+        }
+    }
     return (
         <div>
             <Layout>
@@ -37,7 +66,7 @@ const Comparison = () => {
                                 <p className='p-3'>Vs</p>
                                 <img src={compareImageRight} height="300px" width='300px' alt="Comaper left Image" />
                             </div>
-                            <div className={compare ? 'compare_btn_show' : 'compare_btn_hide'}>
+                            <div className={compareButton ? 'compare_btn_show' : 'compare_btn_hide'}>
                                 <button
                                     style={{
                                         border: 'none',
@@ -48,15 +77,18 @@ const Comparison = () => {
                                     }}
                                 >Compare</button>
                             </div>
+                            <div className={sameBike ? 'same_bike_message_show' : 'same_bike_message_hide'}>
+                                <p className='text-danger'>Cannot Compare With Same Motorcycle</p>
+                            </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
                                 <div>
                                     <label>Select motorcycles:</label>
-                                    <select className='form-control' value={compareImageLeft} onChange={(e)=>setCompareImageLeft(e.target.value)}>
-                                        <option value={process.env.PUBLIC_URL + '/compare_demo_left.PNG'}>Select bike</option>
+                                    <select className='form-control' value={optionStateOne} onChange={leftSelectOption}>
+                                        <option value="1">Select bike</option>
                                         {
                                             bikes.map((item, index) => {
                                                 return (
-                                                    <option key={index} value={item.bikeImage}>{item.name}</option>
+                                                    <option key={index} value={item._id}>{item.name}</option>
                                                 )
                                             })
                                         }
@@ -64,17 +96,45 @@ const Comparison = () => {
                                 </div>
                                 <div>
                                     <label>Compare with:</label>
-                                    <select className='form-control' value={compareImageRight} onChange={(e)=>setCompareImageRight(e.target.value)}>
-                                        <option value={process.env.PUBLIC_URL + '/compare_demo_right.PNG'}>Select bike</option>
+                                    <select className='form-control' value={optionStateTwo} onChange={RightSelectOption}>
+                                        <option value={"1"}>Select bike</option>
                                         {
                                             bikes.map((item, index) => {
                                                 return (
-                                                    <option key={index} value={item.bikeImage}>{item.name}</option>
+                                                    <option key={index} value={item._id}>{item.name}</option>
                                                 )
                                             })
                                         }
                                     </select>
                                 </div>
+                            </div>
+                            <div className='comapareTable'>
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>@twitter</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: 'column', width: '30%' }} className='p-2'>

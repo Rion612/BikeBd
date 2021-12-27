@@ -7,3 +7,15 @@
 .compare_btn_hide{
     display: none;
 }
+.same_bike_message_show{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.same_bike_message_hide{
+    display: none;
+}
+.comapareTable{
+    margin-top: 50px;
+}

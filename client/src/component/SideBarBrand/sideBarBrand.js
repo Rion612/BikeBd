@@ -1,8 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import { Link, useHistory } from "react-router-dom";
 const SideBarBrand = () => {
-    const brand =  useSelector(state => state.brand)
+    const brand = useSelector(state => state.brand)
+    const history = useHistory();
+    const viewMoreBrand = () => {
+        history.push('/brands');
+    }
     return (
         <div className='featuredBike'>
             <div>
@@ -12,9 +16,11 @@ const SideBarBrand = () => {
                 {
                     brand.brands.slice(0, 5).map((item, index) => {
                         return (
-                            <div className='SideBar_brand_innerDiv'>
-                                <img src={item.brandImage} height="100%" width="100%" />
-                            </div>
+                            <Link to={'/brands/' + item.slug}>
+                                <div className='SideBar_brand_innerDiv'>
+                                    <img src={item.brandImage} height="100%" width="100%" />
+                                </div>
+                            </Link>
                         )
                     })
                 }
@@ -28,9 +34,10 @@ const SideBarBrand = () => {
                             cursor: 'pointer',
                             fontWeight: 'bold',
                             padding: '10px 20px',
-                            backgroundColor:"#fff"
+                            backgroundColor: "#fff"
                         }
                     }
+                    onClick={viewMoreBrand}
                 >View more brands</button>
             </div>
         </div>
