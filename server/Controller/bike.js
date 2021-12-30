@@ -2,6 +2,7 @@ const Bike = require('../Model/Bike');
 
 const slugify = require('slugify');
 const { where } = require('../Model/Bike');
+const Rating = require('../Model/Rating');
 
 exports.createBike = (req, res) => {
 
@@ -72,6 +73,26 @@ exports.createBike = (req, res) => {
             })
         }
         else {
+            const array = ['performance_score','durability_score','braking_score','suspension_score','milage_score','features_score','price_score','service_score'];
+            let score_sum = 0;
+            for(let i =0 ;i< array.length ;i++){
+                const ratingValue = parseFloat(bike[array[i]]);
+                score_sum = score_sum + ratingValue;
+            }
+            const final_score = Math.round(score_sum /16.0);
+            const obj={
+                bike: bike._id,
+                rating: final_score
+            }
+            const rating = new Rating(obj);
+            rating.save((error,result)=>{
+                if(error){
+                    return res.status(500).json({
+                        status: false,
+                        message: "Something is wrong! Please try again later."
+                    });
+                }
+            })
             return res.status(201).json({
                 bike
             })
