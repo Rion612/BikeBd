@@ -12,11 +12,12 @@ import Brands from './container/Brands/Brands';
 import ElectricBike from './container/Electric bikes/Electric.bikes';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllBikes, getAllhelmet, getAllNews, getBrands, getHelmetBrand, getShowroom, getAllRatings } from './Actions';
+import { getAllBikes, getAllhelmet, getAllNews, getBrands, getHelmetBrand, getShowroom, getAllRatings, getCategory } from './Actions';
 import Brandbike from './container/BranddBike/brandBike';
 import ScrollToTop from './component/ScrollToTop/ScrollToTop';
 import BrandHelmet from './container/BrandHelmet/BrandHelmet';
 import CompareResult from './container/Comparison/CompareResult';
+import BikeDetails from './container/Bike/BikeDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,8 +38,12 @@ function App() {
   },[]);
   useEffect(()=>{
     dispatch(getAllNews());
-  },[]); useEffect(()=>{
+  },[]); 
+  useEffect(()=>{
     dispatch(getAllRatings());
+  },[]); 
+  useEffect(()=>{
+    dispatch(getCategory());
   },[]);
   
   return (
@@ -59,6 +64,7 @@ function App() {
           <Route path="/bikes/electric_bikes" exact component={ElectricBike}/>
           <Route path="/brands/:slug" exact component={Brandbike}/>
           <Route path="/helmets/brand/:slug" exact component={BrandHelmet}/>
+          <Route path="/bikes/details/:slug" exact component={BikeDetails}/>
         </switch>
       </Router>
 

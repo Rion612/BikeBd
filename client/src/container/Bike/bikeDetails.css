@@ -1,0 +1,17 @@
+.bdContent {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .bikeImageDiv {
+    padding: 20px;
+  }
+  .bikeInfo {
+    padding: 20px;
+  }
+  .bikeInfo p {
+    padding-left: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+  }

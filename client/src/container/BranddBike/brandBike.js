@@ -45,7 +45,7 @@ const Brandbike = (props) => {
                                                 const rating = findOutRating(item);
                                                 return (
                                                     <Col md={4} className="column" key={index} style={{height:'250px'}}>
-                                                        <Link to={`/brands/${props.match.params.slug}/` + item.slug}>
+                                                        <Link to={`/bikes/details/` + item.slug}>
                                                             <Card>
                                                                 <Card.Img variant="top" src={item.bikeImage} style={{ height: '150px', width: '100%' }} />
                                                                 <hr />
