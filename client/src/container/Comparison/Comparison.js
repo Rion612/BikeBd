@@ -7,13 +7,15 @@ import SideBarBrand from '../../component/SideBarBrand/sideBarBrand';
 import { useSelector } from "react-redux";
 import { Table } from "react-bootstrap"
 import './Comparison.css';
+import { useHistory } from 'react-router-dom';
 
 const Comparison = () => {
+    const history = useHistory();
     const bikes = useSelector(state => state.bikes.bikes);
     const [compareButton, setCompareButton] = useState(false);
     const [sameBike, setSameBike] = useState(false);
-    const [compareBikeOne, setCompareBikeOne] = useState({});
-    const [compareBikeTwo, setCompareBikeTwo] = useState({});
+    const [compareBikeOne, setCompareBikeOne] = useState("");
+    const [compareBikeTwo, setCompareBikeTwo] = useState("");
     const [optionStateOne, setOptionStateOne] = useState("1");
     const [optionStateTwo, setOptionStateTwo] = useState("1");
     const [compareImageLeft, setCompareImageLeft] = useState(process.env.PUBLIC_URL + '/compare_demo_left.PNG');
@@ -39,6 +41,7 @@ const Comparison = () => {
         } else {
             const b = bikes.find(x => x._id === event.target.value);
             setCompareImageLeft(b.bikeImage)
+            setCompareBikeOne(b.slug);
         }
     }
     const RightSelectOption = (event) => {
@@ -47,8 +50,12 @@ const Comparison = () => {
             setCompareImageRight(process.env.PUBLIC_URL + '/compare_demo_left.PNG');
         } else {
             const b = bikes.find(x => x._id === event.target.value);
-            setCompareImageRight(b.bikeImage)
+            setCompareImageRight(b.bikeImage);
+            setCompareBikeTwo(b.slug);
         }
+    }
+    const performCompare = () => {
+        history.push(`/comparison/result?bike1=${compareBikeOne}&bike2=${compareBikeTwo}`);
     }
     return (
         <div>
@@ -62,9 +69,9 @@ const Comparison = () => {
                             <p className="paragraph">
                                 “Bike Compare” page is created for the bikers to relate their choices in different terms and needs. Most of the riders becomes confused among several bikes. Sometimes they make wrong decisions because of less knowledge about their different choices. Solving this matter Motorcycle Valley is offering this page to overview your choice head to head and see what matches with your need. Consequently, you make a better decision for yourself. Just click on the drop down menu, select bikes and search, all the necessary information about them will be in front of you.</p>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <img src={compareImageLeft} height="300px" width='300px' alt="Comaper left Image" />
+                                <img src={compareImageLeft} height="250" width='250' alt="Comaper left Image" />
                                 <p className='p-3'>Vs</p>
-                                <img src={compareImageRight} height="300px" width='300px' alt="Comaper left Image" />
+                                <img src={compareImageRight} height="250px" width='250px' alt="Comaper left Image" />
                             </div>
                             <div className={compareButton ? 'compare_btn_show' : 'compare_btn_hide'}>
                                 <button
@@ -75,6 +82,7 @@ const Comparison = () => {
                                         color: '#fff',
                                         padding: '10px 20px'
                                     }}
+                                    onClick={performCompare}
                                 >Compare</button>
                             </div>
                             <div className={sameBike ? 'same_bike_message_show' : 'same_bike_message_hide'}>
@@ -107,34 +115,6 @@ const Comparison = () => {
                                         }
                                     </select>
                                 </div>
-                            </div>
-                            <div className='comapareTable'>
-                                <Table striped bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>@twitter</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: 'column', width: '30%' }} className='p-2'>

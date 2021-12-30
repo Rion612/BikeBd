@@ -16,6 +16,7 @@ import { getAllBikes, getAllhelmet, getAllNews, getBrands, getHelmetBrand, getSh
 import Brandbike from './container/BranddBike/brandBike';
 import ScrollToTop from './component/ScrollToTop/ScrollToTop';
 import BrandHelmet from './container/BrandHelmet/BrandHelmet';
+import CompareResult from './container/Comparison/CompareResult';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
           <Route path="/news" exact component={News}/>
           <Route path="/contact" exact component={Contact}/>
           <Route path="/bike/scooter" exact component={Scooter}/>
+          <Route path="/comparison/result" exact component={CompareResult}/>
           <Route path="/helmets" exact component={Helmet}/>
           <Route path="/brands" exact component={Brands}/>
           <Route path="/bikes/electric_bikes" exact component={ElectricBike}/>
