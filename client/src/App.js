@@ -18,6 +18,7 @@ import ScrollToTop from './component/ScrollToTop/ScrollToTop';
 import BrandHelmet from './container/BrandHelmet/BrandHelmet';
 import CompareResult from './container/Comparison/CompareResult';
 import BikeDetails from './container/Bike/BikeDetails';
+import SearchResult from './container/Search/SearchResult';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ function App() {
           <Route path="/brands/:slug" exact component={Brandbike}/>
           <Route path="/helmets/brand/:slug" exact component={BrandHelmet}/>
           <Route path="/bikes/details/:slug" exact component={BikeDetails}/>
+          <Route path="/search/filter" exact component={SearchResult}/>
         </switch>
       </Router>
 

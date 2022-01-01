@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getCategory } from '../../Actions/category.actions';
 import CarouselNew from '../../component/Carousel/CarouselNew';
 import CarouselSlider from '../../component/Carousel/CarouselSlider';
@@ -10,6 +11,7 @@ import { budgetData, ccData } from '../CommonFiles/Data';
 import './Home.css';
 
 function Home(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCategory())
@@ -19,6 +21,10 @@ function Home(props) {
     const [toggleState, setToggleState] = useState(1);
     const toggleTab = (index) => {
         setToggleState(index);
+    }
+    const clickBrand = (item) =>{
+        history.push(`/brands/${item.slug}`)
+
     }
     return (
         <Layout>
@@ -48,7 +54,7 @@ function Home(props) {
                                         brand.brands.map((item, index) => {
                                             return (
                                                 <div key={index}>
-                                                    <div style={{ padding: "60px" }}>
+                                                    <div style={{ padding: "60px",cursor:'pointer' }} onClick={()=>clickBrand(item)}>
                                                         <img src={item.brandImage} alt="brand_image" title={item.name} height="70px" width="150px" />
                                                     </div>
                                                 </div>
@@ -59,7 +65,7 @@ function Home(props) {
                                             budgetData.map((item, index) => {
                                                 return (
                                                     <div key={index}>
-                                                        <div style={{ padding: "50px" }}>
+                                                        <div style={{ padding: "50px",cursor:'pointer' }} className='Price_tag_div'>
                                                             <div style={{ display: "flex", justifyContent: 'center' }}>
                                                                 <img src={item.image} alt="budget_image" title={"Tk " + item.minRange + " -TK " + item.maxRange} height="100px" width="150px" />
                                                             </div>

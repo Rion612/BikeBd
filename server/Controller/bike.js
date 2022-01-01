@@ -1,8 +1,7 @@
 const Bike = require('../Model/Bike');
-
 const slugify = require('slugify');
-const { where } = require('../Model/Bike');
 const Rating = require('../Model/Rating');
+const BikeBrand = require('../Model/Bikebrand');
 
 exports.createBike = (req, res) => {
 
@@ -127,7 +126,6 @@ exports.bikeSearch = async (req, res) => {
         const cc = req.query.cc;
         const brand = req.query.brand;
         const bikes = await Bike.find({});
-        let output = parseInt("2,299".replace(/,/g, ''));
         if (!bikes) {
             return res.status(500).json({
                 status: false,
@@ -135,10 +133,12 @@ exports.bikeSearch = async (req, res) => {
             });
         }
         const bike = bikes.filter((x) =>
-            x.mileage >= mileage &&
+            x.mileage >= mileage 
+            &&
             parseInt(x.price.replace(/,/g, '')) >= parseInt(price[0].replace(/,/g, '')) &&
             parseInt(x.price.replace(/,/g, '')) <= parseInt(price[1].replace(/,/g, '')) &&
-            x.cc == cc &&
+            x.cc == cc 
+            &&
             x.brand == brand
         );
         return res.status(200).json({

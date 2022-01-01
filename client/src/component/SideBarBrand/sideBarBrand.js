@@ -16,8 +16,8 @@ const SideBarBrand = () => {
                 {
                     brand.brands.slice(0, 5).map((item, index) => {
                         return (
-                            <Link to={'/brands/' + item.slug}>
-                                <div className='SideBar_brand_innerDiv'>
+                            <Link to={'/brands/' + item.slug} key={index}>
+                                <div className='SideBar_brand_innerDiv' key={index}>
                                     <img src={item.brandImage} height="100%" width="100%" />
                                 </div>
                             </Link>

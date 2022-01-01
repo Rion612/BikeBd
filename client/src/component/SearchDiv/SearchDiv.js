@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { mileageData,ccData, budgetData  } from '../../container/CommonFiles/Data';
 
 const SearchDiv = () => {
+    const history = useHistory();
     const brands = useSelector(state => state.brand.brands);
+    const [mileage, setMileage] = useState("");
+    const [cc, setCC] = useState("");
+    const [price, setPrice] = useState("");
+    const [brandID, setBrandId] = useState("");
+    const searchButtonClicked = () =>{
+        history.push(`/search/filter?price=${price}&cc=${cc}&mileage=${mileage}&brand=${brandID}`);
+        setMileage("");
+        setPrice("");
+        setCC("");
+        setBrandId('');
+    }
     return (
         <div>
             <div>
@@ -14,12 +27,12 @@ const SearchDiv = () => {
                     Brand
                 </div>
                 <div style={{ width: '70%' }}>
-                    <select className='form-control'>
+                    <select className='form-control'value={brandID} onChange={(e)=>setBrandId(e.target.value)}>
                         <option>Any Brand</option>
                         {
                             brands.map((item, index) => {
                                 return (
-                                    <option key={index}>{item.name}</option>
+                                    <option key={index} value={item._id}>{item.name}</option>
                                 )
                             })
                         }
@@ -31,12 +44,12 @@ const SearchDiv = () => {
                     CC
                 </div>
                 <div style={{ width: '70%' }}>
-                    <select className='form-control'>
+                    <select className='form-control' value={cc} onChange={(e)=>setCC(e.target.value)}>
                         <option>Any CC</option>
                         {
                             ccData.slice(0,8).map((item, index) => {
                                 return (
-                                    <option key={index}>{item.value}{'cc'}</option>
+                                    <option key={index} value={item.value}>{item.value}{'cc'}</option>
                                 )
                             })
                         }
@@ -48,12 +61,12 @@ const SearchDiv = () => {
                     Mileage
                 </div>
                 <div style={{ width: '70%' }}>
-                    <select className='form-control'>
+                    <select className='form-control' value={mileage} onChange={(e)=>setMileage(e.target.value)}>
                         <option>Any Mileage</option>
                         {
                             mileageData.map((item, index) => {
                                 return (
-                                    <option key={index}>{item.value}{'+'+ ' '+'KM/L'}</option>
+                                    <option key={index} value={item.value}>{item.value}{'+'+ ' '+'KM/L'}</option>
                                 )
                             })
                         }
@@ -65,12 +78,12 @@ const SearchDiv = () => {
                     Price
                 </div>
                 <div style={{ width: '70%' }}>
-                    <select className='form-control'>
+                    <select className='form-control' value={price} onChange={(e)=>setPrice(e.target.value)}>
                         <option>Any Price</option>
                         {
                             budgetData.map((item, index) => {
                                 return (
-                                    <option key={index}>{item.minRange}{'-'}{item.maxRange}</option>
+                                    <option key={index} value={item.minRange+'-'+item.maxRange}>{item.minRange}{'-'}{item.maxRange}</option>
                                 )
                             })
                         }
@@ -87,7 +100,7 @@ const SearchDiv = () => {
                         cursor: 'pointer',
                         padding: '10px 20px',
                         width: '100%'
-                    }}>Search</button>
+                    }} onClick={searchButtonClicked}>Search</button>
             </div>
         </div>
     );

@@ -56,3 +56,6 @@
     border-bottom: 5px solid salmon;
     transition: 0.3ms;
 }
+.Price_tag_div:hover{
+    text-decoration: underline;
+}
