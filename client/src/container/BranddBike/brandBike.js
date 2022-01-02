@@ -22,7 +22,7 @@ const Brandbike = (props) => {
         const r = ratings.filter(x=>x.bike === bike._id);
         let ratingValue = 0;
         for(let i=0 ;i< r.length;i++){
-            ratingValue = r[i].rating;
+            ratingValue = ratingValue+r[i].rating;
         }
         return Math.round(ratingValue/r.length)
     }

@@ -39,6 +39,7 @@ const helmetRoute = require('./Route/helmet');
 const newsRoute = require('./Route/news');
 const contactRoute = require('./Route/contact');
 const ratingRoute = require('./Route/ratings');
+const reviewRoute = require('./Route/review');
 
 app.use("/api",indexRoute);
 app.use("/api",showroomRoute);
@@ -47,6 +48,7 @@ app.use("/api",helmetRoute);
 app.use("/api",newsRoute);
 app.use("/api",contactRoute);
 app.use("/api",ratingRoute);
+app.use("/api",reviewRoute);
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server is running successfully on port ${process.env.PORT}`);

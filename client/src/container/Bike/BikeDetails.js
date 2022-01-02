@@ -15,16 +15,18 @@ import { AiOutlineMenuFold } from "react-icons/ai";
 import { BsFillStarFill } from "react-icons/bs";
 import { FaStar } from 'react-icons/fa';
 import { getAllRatings } from '../../Actions';
-
+import axios from '../../helpers/axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const BikeDetails = (props) => {
     const dispatch = useDispatch();
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getAllRatings());
-      },[]);
+    }, []);
     const brands = useSelector(state => state.brand.brands);
     const categories = useSelector(state => state.category.categories);
     const bikes = useSelector(state => state.bikes.bikes);
-    const ratings = useSelector(state=>state.ratings.ratings);
+    const ratings = useSelector(state => state.ratings.ratings);
     const bikeInfo = bikes.find(x => x.slug === props.match.params.slug);
     const categoryInfo = categories.find(x => x._id === bikeInfo?.category)
     const brandInfo = brands.find(x => x._id === bikeInfo?.brand);
@@ -38,22 +40,22 @@ const BikeDetails = (props) => {
     const labels = ['Performance score', 'Durability score', 'Braking score', 'Suspension score', 'Mileage score', 'Features score', 'Price score', 'Service score'];
     const colors = ['#08aa38', '#e72630', '#c5d62c', '#2c4bd6', '#d62cd6', '#3a8dda', 'orange', '#247681'];
     const attributes = ['performance_score', 'durability_score', 'braking_score', 'suspension_score', 'milage_score', 'features_score', 'price_score', 'service_score'];
-    const reviewSumitHandle = () => {
-        if(rating === null){
+    const reviewSumitHandle = async () => {
+        if (rating === null) {
             setRatingValid(false);
             setReviewerNameValid(true);
             setReviewValid(true);
         }
-        else if(reviewerName === ""){
+        else if (reviewerName === "") {
             setRatingValid(true);
             setReviewerNameValid(false);
             setReviewValid(true);
         }
-        else if(review === ""){
+        else if (review === "") {
             setRatingValid(true);
             setReviewerNameValid(true);
             setReviewValid(false);
-        }else{
+        } else {
             setRatingValid(true);
             setReviewerNameValid(true);
             setReviewValid(true);
@@ -64,21 +66,31 @@ const BikeDetails = (props) => {
             const reviewObj = {
                 bike: bikeInfo?._id,
                 review: review,
-                reviewer_name: reviewerName
+                reviwer_name: reviewerName
+            }
+            console.log(reviewObj)
+            const res_one = await axios.post('/create/bikes/review', reviewObj);
+            const res_two = await axios.post('/create/bikes/rating', ratingObj);
+            setRating(null);
+            setReview("");
+            setReviewerName("");
+            if (res_one.status === 201 && res_two.status === 200) {
+                toast.success("Reviwe and rating submitted successfully.")
             }
         }
-        
+
     }
-    const findOutRating = ()=>{
-        const r = ratings.filter(x=>x.bike === bikeInfo?._id);
+    const findOutRating = () => {
+        const r = ratings.filter(x => x.bike === bikeInfo?._id);
         let ratingValue = 0;
-        for(let i=0 ;i< r.length;i++){
-            ratingValue = r[i].rating;
+        for (let i = 0; i < r.length; i++) {
+            ratingValue = ratingValue + r[i].rating;
         }
-        return Math.round(ratingValue/r.length)
+        return Math.round(ratingValue / r.length)
     }
     return (
         <Layout>
+            <ToastContainer />
             <div className='container'>
                 <BreadcumCom fTab="Home" sTab={props.match.params.slug} route="/" />
                 <div className="bdContent">
@@ -444,7 +456,7 @@ const BikeDetails = (props) => {
                         )}
                         <div>
                             <label>Your name:</label>
-                            <input className='form-control' type='text' value={reviewerName} onChange={(e)=>setReviewerName(e.target.value)} />
+                            <input className='form-control' type='text' value={reviewerName} onChange={(e) => setReviewerName(e.target.value)} />
                         </div>
                         {reviewerNameValid === false ? (
                             <span style={{ color: "red" }}>Name is required!</span>
