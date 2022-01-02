@@ -6,6 +6,10 @@ const reviewSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    reviwer_name: {
+        type: string,
+        required: true
+    },
     bike: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Bike',
         required: true
