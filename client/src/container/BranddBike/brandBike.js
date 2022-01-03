@@ -85,11 +85,12 @@ const Brandbike = (props) => {
                             </div>
                         </div>
                         <div style={{ display: "flex", flexDirection: 'column', width: '30%' }} className='p-2'>
-                            <SideBarBrand />
-                            <br />
                             <FeatureBike />
                             <br />
                             <SearchDiv />
+                            <br/>
+                            <SideBarBrand />
+                            <br />
                         </div>
                     </div>
                 </div>

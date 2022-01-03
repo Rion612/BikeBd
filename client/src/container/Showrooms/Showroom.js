@@ -6,11 +6,16 @@ import './Style.css'
 import Omege from '../../Images/omega.jpg'
 import Moto from '../../Images/moto.PNG'
 import NRMoto from '../../Images/NRmotors.jpg'
+import { useHistory } from 'react-router-dom';
 
 
 const Showroom = () => {
+    const history = useHistory();
     const showroom = useSelector(state => state.showroom);
     const brand = useSelector(state => state.brand);
+    const clickShowroomButton = (item) =>{
+        history.push(`/brand/showrooms/${item.slug}`)
+    }
     return (
         <div>
             <Layout>
@@ -34,16 +39,16 @@ const Showroom = () => {
                                             brand.brands.map((item, index) => {
                                                 return (
 
-                                                    <tr>
+                                                    <tr key={index}>
                                                         <td className="tableCol1">
                                                             {item.name}
                                                         </td>
                                                         <td>
                                                             <img src={item.brandImage} alt="Brand" height="120px" width="120px" /></td>
                                                         <td className="tableCol3">
-                                                            <butto className="btn btn-danger btn-lg">
+                                                            <button className="btn btn-danger btn-lg" onClick={()=>clickShowroomButton(item)}>
                                                                 View Address
-                                                            </butto>
+                                                            </button>
                                                         </td>
                                                     </tr>
 

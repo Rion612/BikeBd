@@ -28,3 +28,20 @@ exports.createReview=(async (req, res) => {
         })
     }
 })
+exports.getAllReviews= async (req,res)=>{
+    try {
+        const reviews = await Review.find({});
+        return res.status(200).json({
+            status: true,
+            total: reviews.length,
+            data: reviews
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            status: false,
+            message: "Soemthing is wrong!",
+            error: error
+        }) 
+    }
+}

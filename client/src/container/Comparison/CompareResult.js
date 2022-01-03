@@ -144,10 +144,10 @@ const CompareResult = (props) => {
                                     <tr>
                                         <td>Full features</td>
                                         <td className='text-center'>
-                                            <Link>Click here</Link>
+                                            <Link to={`/bikes/details/` + motorbike1?.slug}>Click here</Link>
                                         </td>
                                         <td className='text-center'>
-                                            <Link>Click here</Link>
+                                            <Link to={`/bikes/details/` + motorbike2?.slug}>Click here</Link>
                                         </td>
                                     </tr>
                                 </tbody>

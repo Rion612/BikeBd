@@ -12,7 +12,7 @@ const FeatureBike = () => {
             {
                 bikes.slice(0,6).map((item, index) => {
                     return (
-                        <Link to={`/bikes/details/` + item.slug} style={{color: 'black'}}>
+                        <Link to={`/bikes/details/` + item.slug} style={{color: 'black'}} key={index}>
                         <div style={{ display: 'flex', marginTop: '5px' }} className='p-2'>
                             <div style={{ width: '30%' }}><img src={item.bikeImage} height="100px" width="100px" /></div>
                             <div style={{ width: '70%', padding: '15px 10px' }}>

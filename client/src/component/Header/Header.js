@@ -23,8 +23,7 @@ const Header = () => {
             <div className="navdiv">
                 <ul className={isMobile ? "nav-link-mobile" : "nav-links"} onClick={() => setIsMobile(false)}>
                     <NavLink to="/" className="home" activeStyle={{ color: "blue" }} exact={true} > <li>Home</li></NavLink>
-                    <NavLink to="/bike_price" className="bike" activeStyle={{ color: "blue" }} ><li>Bike price</li></NavLink>
-                    <NavLink to="/brands" className="brands" activeStyle={{ color: "blue" }}><li>Brands</li></NavLink>
+                    <NavLink to="/brands" className="brands" activeStyle={{ color: "blue" }}><li>Bikes & Brands</li></NavLink>
                     <NavLink to="/helmets" className="helmet" activeStyle={{ color: "blue" }}><li>Helmet</li></NavLink>
                     <NavLink to="/showrooms" className="showrooms" activeStyle={{ color: "blue" }}><li>Showrooms</li></NavLink>
                     <NavLink to="/bike/scooter" className="scooter" activeStyle={{ color: "blue" }}><li>Scooter</li></NavLink>

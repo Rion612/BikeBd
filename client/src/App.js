@@ -12,7 +12,7 @@ import Brands from './container/Brands/Brands';
 import ElectricBike from './container/Electric bikes/Electric.bikes';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllBikes, getAllhelmet, getAllNews, getBrands, getHelmetBrand, getShowroom, getAllRatings, getCategory } from './Actions';
+import { getAllReviews, getAllBikes, getAllhelmet, getAllNews, getBrands, getHelmetBrand, getShowroom, getAllRatings, getCategory } from './Actions';
 import Brandbike from './container/BranddBike/brandBike';
 import ScrollToTop from './component/ScrollToTop/ScrollToTop';
 import BrandHelmet from './container/BrandHelmet/BrandHelmet';
@@ -22,6 +22,8 @@ import SearchResult from './container/Search/SearchResult';
 import StyleBike from './container/StyleBike/StyleBike';
 import BudgetBike from './container/BudgetBike/BudgetBike';
 import CCBike from './container/CCBike/CCBike';
+import ShowroomBrands from './container/Showrooms/ShowroomBrands';
+import SpecificNews from './container/News/SpecificNews';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,13 +50,16 @@ function App() {
   },[]); 
   useEffect(()=>{
     dispatch(getCategory());
+  },[]); 
+  useEffect(()=>{
+    dispatch(getAllReviews());
   },[]);
   
   return (
     <div>
       <Router>
         <ScrollToTop/>
-        <switch>
+        <Switch>
           <Route path="/bike_price" exact component={Bike}/>
           <Route path="/" exact component={Home}/>
           <Route path="/comparison" exact component={Comparison}/>
@@ -73,7 +78,9 @@ function App() {
           <Route path="/search/filter" exact component={SearchResult}/>
           <Route path="/bikes/budget" exact component={BudgetBike} />
           <Route path="/bikes/cc" exact component={CCBike} />
-        </switch>
+          <Route path="/brand/showrooms/:slug" exact component={ShowroomBrands} />    
+          <Route path="/news/:id" exact component={SpecificNews} />
+        </Switch>
       </Router>
 
     </div>

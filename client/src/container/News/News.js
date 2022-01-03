@@ -5,9 +5,11 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Layout from '../../component/Layout/Layout';
 import './news.css'
 import { getAllNews } from '../../Actions';
+import { useHistory } from 'react-router-dom';
 
 const News = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const news = useSelector(state => state.news);
     const [toggleState, setToggleState] = useState(1);
     const [data, setData] = useState([]);
@@ -26,6 +28,9 @@ const News = () => {
             setData(d.reverse());
         }
     };
+    const clickNews = (item)=>{
+        history.push(`/news/${item._id}`)
+    }
     return (
         <div>
             <Layout>
@@ -69,7 +74,7 @@ const News = () => {
                                                         </Col>
                                                     </Row>
                                                     <Row>
-                                                        <Col style={{ marginTop: '10px' }}>
+                                                        <Col style={{ marginTop: '10px' }} onClick={()=>clickNews(item)}>
                                                             <button className="btn btn-danger">Read more</button>
                                                         </Col>
                                                     </Row>
@@ -101,7 +106,7 @@ const News = () => {
                                                         </Col>
                                                     </Row>
                                                     <Row>
-                                                        <Col style={{ marginTop: '10px' }}>
+                                                        <Col style={{ marginTop: '10px' }}  onClick={()=>clickNews(item)}>
                                                             <button className="btn btn-danger">Read more</button>
                                                         </Col>
                                                     </Row>

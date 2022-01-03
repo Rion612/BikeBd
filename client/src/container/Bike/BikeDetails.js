@@ -14,22 +14,28 @@ import ScoreBar from '../../component/ScoreBar/ScoreBar';
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { BsFillStarFill } from "react-icons/bs";
 import { FaStar } from 'react-icons/fa';
-import { getAllRatings } from '../../Actions';
+import { getAllRatings, getAllReviews } from '../../Actions';
 import axios from '../../helpers/axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const BikeDetails = (props) => {
+    const [render, setRender ] = useState(false);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllRatings());
-    }, []);
+    }, [render]);
+    useEffect(() => {
+        dispatch(getAllReviews());
+    }, [render]);
     const brands = useSelector(state => state.brand.brands);
     const categories = useSelector(state => state.category.categories);
     const bikes = useSelector(state => state.bikes.bikes);
     const ratings = useSelector(state => state.ratings.ratings);
+    const reviews = useSelector(state => state.reviews.reviews);
     const bikeInfo = bikes.find(x => x.slug === props.match.params.slug);
     const categoryInfo = categories.find(x => x._id === bikeInfo?.category)
     const brandInfo = brands.find(x => x._id === bikeInfo?.brand);
+    const reviewList = reviews.filter(x => x.bike === bikeInfo?._id);
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
     const [review, setReview] = useState("");
@@ -75,6 +81,7 @@ const BikeDetails = (props) => {
             setReview("");
             setReviewerName("");
             if (res_one.status === 201 && res_two.status === 200) {
+                setRender(!render);
                 toast.success("Reviwe and rating submitted successfully.")
             }
         }
@@ -414,7 +421,35 @@ const BikeDetails = (props) => {
                 </div>
                 <div style={{ marginTop: '20px' }}>
                     <AccordionCom status={true} headtitle="User's Reviews" icon={<MdRateReview />}>
-                        Here all user's review will be shown
+                        {reviewList.length > 0 ? (
+                            reviewList.map((item, index) => {
+                                return (
+                                    <div style={{ display: "flex" }} key={index}>
+                                        <div>
+                                            <img
+                                                src={process.env.PUBLIC_URL + "/avater.png"}
+                                                alt="Avater"
+                                                height="50px"
+                                                width="50px"
+                                            />
+                                        </div>
+                                        <div>
+                                            <div style={{ display: "flex" }}>
+                                                <div style={{ padding: "10px" }}>
+                                                    <h5>{item?.reviwer_name}</h5>
+                                                </div>
+                                            </div>
+                                            <div style={{ padding: "10px", fontSize: "12px" }}>
+                                                Date: {(item?.createdAt)?.split('T')[0]}
+                                            </div>
+                                            <div style={{ padding: "10px" }}>{item?.review}</div>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <div>There are no reviews yet.</div>
+                        )}
                     </AccordionCom>
                 </div>
                 <div style={{ marginTop: '20px' }}>
