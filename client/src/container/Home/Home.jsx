@@ -26,6 +26,15 @@ function Home(props) {
         history.push(`/brands/${item.slug}`)
 
     }
+    const clickStyle = (item) =>{
+        history.push(`/bikes/style/${item.slug}`)
+    }
+    const clickBudget = (item) =>{
+        history.push(`/bikes/budget?price=${item.minRange+'-'+item.maxRange}`)
+    }
+    const clickCC = (item) =>{
+        history.push(`/bikes/cc?cc=${item.value}`)
+    }
     return (
         <Layout>
             <div className="Home">
@@ -65,7 +74,7 @@ function Home(props) {
                                             budgetData.map((item, index) => {
                                                 return (
                                                     <div key={index}>
-                                                        <div style={{ padding: "50px",cursor:'pointer' }} className='Price_tag_div'>
+                                                        <div style={{ padding: "50px",cursor:'pointer' }} className='Price_tag_div' onClick={()=>clickBudget(item)}>
                                                             <div style={{ display: "flex", justifyContent: 'center' }}>
                                                                 <img src={item.image} alt="budget_image" title={"Tk " + item.minRange + " -TK " + item.maxRange} height="100px" width="150px" />
                                                             </div>
@@ -80,7 +89,7 @@ function Home(props) {
                                                 ccData.map((item, index) => {
                                                     return (
                                                         <div key={index}>
-                                                            <div style={{ padding: "60px" }}>
+                                                            <div style={{ padding: "60px", cursor:'pointer' }} onClick={()=>clickCC(item)}>
                                                                 <div style={{ display: "flex", justifyContent: 'center' }}>
                                                                     <img src={item.image} alt="budget_image" title={item.value + "cc"} height="100px" width="150px" />
                                                                 </div>
@@ -94,7 +103,7 @@ function Home(props) {
                                                     return (
                                                         <div key={index}>
                                                             <div style={{ padding: "50px" }}>
-                                                                <div style={{ display: "flex", justifyContent: 'center' }}>
+                                                                <div style={{ display: "flex", justifyContent: 'center', cursor:'pointer' }}  onClick={()=>clickStyle(item)}>
                                                                     <img src={item.categoryImage} alt="budget_image" title={item.categoryImage} height="100px" width="150px" />
                                                                 </div>
                                                                 <p style={{ fontWeight: 'bold', textAlign: 'center' }}>{item.name}</p>

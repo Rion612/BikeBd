@@ -72,20 +72,20 @@ exports.createBike = (req, res) => {
             })
         }
         else {
-            const array = ['performance_score','durability_score','braking_score','suspension_score','milage_score','features_score','price_score','service_score'];
+            const array = ['performance_score', 'durability_score', 'braking_score', 'suspension_score', 'milage_score', 'features_score', 'price_score', 'service_score'];
             let score_sum = 0;
-            for(let i =0 ;i< array.length ;i++){
+            for (let i = 0; i < array.length; i++) {
                 const ratingValue = parseFloat(bike[array[i]]);
                 score_sum = score_sum + ratingValue;
             }
-            const final_score = Math.round(score_sum /16.0);
-            const obj={
+            const final_score = Math.round(score_sum / 16.0);
+            const obj = {
                 bike: bike._id,
                 rating: final_score
             }
             const rating = new Rating(obj);
-            rating.save((error,result)=>{
-                if(error){
+            rating.save((error, result) => {
+                if (error) {
                     return res.status(500).json({
                         status: false,
                         message: "Something is wrong! Please try again later."
@@ -133,11 +133,11 @@ exports.bikeSearch = async (req, res) => {
             });
         }
         const bike = bikes.filter((x) =>
-            x.mileage >= mileage 
+            x.mileage >= mileage
             &&
             parseInt(x.price.replace(/,/g, '')) >= parseInt(price[0].replace(/,/g, '')) &&
             parseInt(x.price.replace(/,/g, '')) <= parseInt(price[1].replace(/,/g, '')) &&
-            x.cc == cc 
+            x.cc == cc
             &&
             x.brand == brand
         );
@@ -152,5 +152,59 @@ exports.bikeSearch = async (req, res) => {
             message: "Something is wrong! Please try again later.",
             error: error
         })
+    }
+}
+exports.bikeSearchByBudget = async (req, res) => {
+    try {
+        const price = (req.query.price).split('-');
+        const bikes = await Bike.find({});
+        if (!bikes) {
+            return res.status(500).json({
+                status: false,
+                message: "Something is wrong! Please try again later."
+            });
+        }
+        const bike = await bikes.filter((x) =>
+            parseInt(x.price.replace(/,/g, '')) >= parseInt(price[0].replace(/,/g, ''))
+            &&
+            parseInt(x.price.replace(/,/g, '')) <= parseInt(price[1].replace(/,/g, ''))
+        );
+        return res.status(200).json({
+            status: true,
+            total: bike.length,
+            data: bike
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            status: false,
+            message: "Something is wrong! Please try again later.",
+            error: error
+        });
+    }
+}
+exports.bikeSearchByCC = async (req, res) => {
+    try {
+        const cc = req.query.cc;
+        const bikes = await Bike.find({});
+        if (!bikes) {
+            return res.status(500).json({
+                status: false,
+                message: "Something is wrong! Please try again later."
+            });
+        }
+        const bike = bikes.filter((x) =>x.cc == cc);
+        return res.status(200).json({
+            status: true,
+            total: bike.length,
+            data: bike
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            status: false,
+            message: "Something is wrong! Please try again later.",
+            error: error
+        });
     }
 }

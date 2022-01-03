@@ -16,6 +16,7 @@ import axios from '../../helpers/axios';
 const SearchResult = (props) => {
     const brands = useSelector(state => state.brand.brands);
     const query = new URLSearchParams(props.location.search);
+    const [render, setRender] = useState(false);
     const mileage = query.get('mileage');
     const cc = query.get('cc');
     const price = query.get('price');
@@ -25,8 +26,9 @@ const SearchResult = (props) => {
         const res = await axios.get(`/bikes/search?price=${price}&cc=${cc}&mileage=${mileage}&brand=${brand}`);
         if(res.status == 200){
             setData(res.data.data);
+            setRender(!render)
         }
-    },[data]);
+    },[render]);
     const bikes = useSelector(state => state.bikes.bikes);
     const ratings = useSelector(state=>state.ratings.ratings);
     const findOutRating = (bike)=>{
@@ -55,12 +57,12 @@ const SearchResult = (props) => {
                                             {data.map((item, index) => {
                                                 const rating = findOutRating(item);
                                                 return (
-                                                    <Col md={4} className="column" key={index} style={{height:'250px'}}>
+                                                    <Col md={4}  style={{ height:'350px', marginTop:'50px'}} key={index}>
                                                         <Link to={`/bikes/details/` + item.slug}>
                                                             <Card>
                                                                 <Card.Img variant="top" src={item.bikeImage} style={{ height: '150px', width: '100%' }} />
                                                                 <hr />
-                                                                <Card.Body>
+                                                                <Card.Body style={{height:'200px'}}>
                                                                     <Card.Text>
                                                                         <div style={{ display: 'flex' }}>
                                                                             <div><BiMoney color='green' size={20} /></div>

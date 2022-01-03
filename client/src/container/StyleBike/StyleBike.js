@@ -10,20 +10,22 @@ import { Link } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
 import { BiMoney } from 'react-icons/bi'
 import RateStar from '../../component/Rating star/RateStar';
+import AccordionCom from '../../component/AccordionCom/AccordionCom';
 
-const Scooter = () => {
+const StyleBike = (props) => {
+    const brands = useSelector(state => state.brand.brands);
     const categories = useSelector(state => state.category.categories);
-    const cate = categories.find(x => x.slug === "Scooter");
-    const ratings = useSelector(state => state.ratings.ratings);
+    const ratings = useSelector(state=>state.ratings.ratings);
     const bikes = useSelector(state => state.bikes.bikes);
+    const cate = categories.find(x => x.slug === props.match.params.slug);
     const bikeList = bikes.filter(x => x.category === cate?._id);
-    const findOutRating = (bike) => {
-        const r = ratings.filter(x => x.bike === bike._id);
+    const findOutRating = (bike)=>{
+        const r = ratings.filter(x=>x.bike === bike._id);
         let ratingValue = 0;
-        for (let i = 0; i < r.length; i++) {
-            ratingValue = ratingValue + r[i].rating;
+        for(let i=0 ;i< r.length;i++){
+            ratingValue = ratingValue+r[i].rating;
         }
-        return Math.round(ratingValue / r.length)
+        return Math.round(ratingValue/r.length)
     }
     return (
         <div>
@@ -31,8 +33,8 @@ const Scooter = () => {
                 <div className="container">
                     <div style={{ display: 'flex', minHeight: '100vh' }}>
                         <div style={{ width: "70%" }} className='p-2'>
-                            <BreadcumCom fTab="Home" sTab="Electrical motorbikes" route="/" />
-                            <div className='title'><h4>List of Electrical Motorbikes</h4></div>
+                            <BreadcumCom fTab="Home" sTab={props.match.params.slug} route="/" />
+                            <div className='title'><h4>{cate?.name} Motorbikes</h4></div>
                             <div>
                                 {
                                     bikeList.length ?
@@ -40,12 +42,12 @@ const Scooter = () => {
                                             {bikeList.map((item, index) => {
                                                 const rating = findOutRating(item);
                                                 return (
-                                                    <Col md={4} style={{ height: '350px', marginTop: '50px' }} key={index}>
+                                                    <Col md={4}  style={{ height:'350px', marginTop:'50px'}} key={index}>
                                                         <Link to={`/bikes/details/` + item.slug}>
                                                             <Card>
                                                                 <Card.Img variant="top" src={item.bikeImage} style={{ height: '150px', width: '100%' }} />
                                                                 <hr />
-                                                                <Card.Body style={{ height: '200px' }}>
+                                                                <Card.Body style={{height:'200px'}}>
                                                                     <Card.Text>
                                                                         <div style={{ display: 'flex' }}>
                                                                             <div><BiMoney color='green' size={20} /></div>
@@ -62,7 +64,7 @@ const Scooter = () => {
                                                                             </div>
                                                                         </div>
                                                                         <div>
-                                                                            <RateStar rating={rating} size={20} />
+                                                                            <RateStar rating={rating} size={20}/>
                                                                         </div>
                                                                     </Card.Text>
                                                                 </Card.Body>
@@ -90,9 +92,8 @@ const Scooter = () => {
                     </div>
                 </div>
             </Layout>
-
         </div>
     );
 };
 
-export default Scooter;
+export default StyleBike;

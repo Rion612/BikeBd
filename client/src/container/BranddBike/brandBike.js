@@ -44,12 +44,12 @@ const Brandbike = (props) => {
                                             {bikeList.map((item, index) => {
                                                 const rating = findOutRating(item);
                                                 return (
-                                                    <Col md={4} className="column" key={index} style={{height:'250px'}}>
+                                                    <Col md={4}  style={{ height:'350px', marginTop:'50px'}} key={index} >
                                                         <Link to={`/bikes/details/` + item.slug}>
                                                             <Card>
                                                                 <Card.Img variant="top" src={item.bikeImage} style={{ height: '150px', width: '100%' }} />
                                                                 <hr />
-                                                                <Card.Body>
+                                                                <Card.Body style={{height:'200px'}}>
                                                                     <Card.Text>
                                                                         <div style={{ display: 'flex' }}>
                                                                             <div><BiMoney color='green' size={20} /></div>

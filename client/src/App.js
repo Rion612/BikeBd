@@ -19,6 +19,9 @@ import BrandHelmet from './container/BrandHelmet/BrandHelmet';
 import CompareResult from './container/Comparison/CompareResult';
 import BikeDetails from './container/Bike/BikeDetails';
 import SearchResult from './container/Search/SearchResult';
+import StyleBike from './container/StyleBike/StyleBike';
+import BudgetBike from './container/BudgetBike/BudgetBike';
+import CCBike from './container/CCBike/CCBike';
 
 function App() {
   const dispatch = useDispatch();
@@ -64,9 +67,12 @@ function App() {
           <Route path="/brands" exact component={Brands}/>
           <Route path="/bikes/electric_bikes" exact component={ElectricBike}/>
           <Route path="/brands/:slug" exact component={Brandbike}/>
+          <Route path="/bikes/style/:slug" exact component={StyleBike}/>
           <Route path="/helmets/brand/:slug" exact component={BrandHelmet}/>
           <Route path="/bikes/details/:slug" exact component={BikeDetails}/>
           <Route path="/search/filter" exact component={SearchResult}/>
+          <Route path="/bikes/budget" exact component={BudgetBike} />
+          <Route path="/bikes/cc" exact component={CCBike} />
         </switch>
       </Router>
 
