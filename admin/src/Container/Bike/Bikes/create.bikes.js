@@ -265,6 +265,7 @@ const CreateBikes = () => {
                             <div>
                                 <select className="form-select" value={gears} onChange={(e) => setGears(e.target.value)}>
                                     <option selected>How many gears?</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                     <option value="6">6</option>
@@ -273,6 +274,7 @@ const CreateBikes = () => {
                             <div>
                                 <select className="form-select" value={engine_cooling} onChange={(e) => setEngine_cooling(e.target.value)}>
                                     <option selected>Select Engine cooling type</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Liquid cooled">Liquid cooled</option>
                                     <option value="Oil-Cooled">Oil-Cooled</option>
                                     <option value="Air Cooled">Air Cooled</option>
@@ -281,6 +283,7 @@ const CreateBikes = () => {
                             <div>
                                 <select className="form-select" value={fuel_supply} onChange={(e) => setFuel_supply(e.target.value)}>
                                     <option selected>Select Fuel Supply</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Fuel injection">Fuel injection</option>
                                     <option value="Carburetor (UCAL, CV)">Carburetor (UCAL, CV)</option>
                                     <option value="Carburetor">Carburetor</option>
@@ -290,6 +293,7 @@ const CreateBikes = () => {
                             <div>
                                 <select className="form-select" value={starting_method} onChange={(e) => setStarting_method(e.target.value)}>
                                     <option selected>Starting method</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Electric starter">Electric starter</option>
                                     <option value="Kick & Electric starter">Kick & Electric starter</option>
                                 </select>
@@ -298,6 +302,7 @@ const CreateBikes = () => {
                                 <select className="form-select" value={transmission_type}
                                     onChange={(e) => setTransmission_type(e.target.value)}>
                                     <option selected>Transmission type</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Manual">Manual</option>
                                     <option value="Automatic">Automatic</option>
                                     <option value="Semi-Automatic">Semi-Automatic</option>
@@ -526,6 +531,7 @@ const CreateBikes = () => {
                             <select className="form-select" value={brand}
                                 onChange={(e) => setBrand(e.target.value)}>
                                 <option selected>Select bike's brand</option>
+                                <option value={"61d46ff942c150c7b336f23f"}>Electrical brand</option>
                                 {
                                     bikeBrands?.map((item, index) => {
                                         return (

@@ -3,7 +3,7 @@ const { createHelemetBrand, getHelmetBrand, editHelmetBrand, deleteHelmetBrand }
 const multer = require('multer');
 const shortid =require('shortid');
 const path =require('path');
-const { createHelmet, getBike, gethelmets, getAllHelmet } = require('../Controller/helmet');
+const { createHelmet, getBike, gethelmets, getAllHelmet, deleteHelmet } = require('../Controller/helmet');
 
 const router = express.Router();
 
@@ -25,7 +25,7 @@ router.post('/delete/helmet/brand',deleteHelmetBrand);
 
 
 router.post('/create/helmet',upload.single('helmetImage'),createHelmet);
-
+router.post('/delete/helmet', deleteHelmet);
 
 router.get('/get/helmet/:slug',gethelmets);
 

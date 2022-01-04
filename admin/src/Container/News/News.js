@@ -16,6 +16,7 @@ const News = () => {
     const [newsImage, setNewsImage] = useState("");
     const [category,setCategory] = useState("");
     const [show, setShow] = useState(false);
+    const [createModalShow, setCreateModalShow] = useState(false);
     const [details, setdetails] = useState({});
     const [state, setState] = useState(false);
 
@@ -47,7 +48,7 @@ const News = () => {
     };
 
     const [display, setDisplay] = useState(false);
-    const directClose = () => {
+    const directClose = async () => {
         const form = new FormData();
         form.append("_id", details._id);
         if (title) {
@@ -62,14 +63,18 @@ const News = () => {
         if (newsImage) {
             form.append("NewsImage", newsImage);
         }
+        const edit_response = await axios.post('/update/news',form);
+        if(edit_response.status === 200 ){
+            toast.success(edit_response.data.message);
+            setState(!state);
+        }else{
+            toast.error("Something is wrong!");
+        }
         setTitle("");
         setCategory("");
         setDescription("");
         setNewsImage("");
         setDisplay(false);
-        for (var pair of form.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
     };
     const directShow = (item) => {
         setdetails(item);
@@ -78,6 +83,26 @@ const News = () => {
         setCategory(item.category);
         setDisplay(true);
     }
+    const createNewsFromModal = async() =>{   
+        const form = new FormData();
+        form.append("title", title);
+        form.append("category", category);
+        form.append("NewsImage", newsImage);
+        form.append("description", description);
+        const create_response = await axios.post('/create/news',form);
+        if( create_response.status === 201){
+            toast.success("News created successfully.");
+            setState(!state);
+        }
+        setTitle("");
+        setCategory("");
+        setDescription("");
+        setNewsImage("");
+        setCreateModalShow(false);
+    }
+    const OpenModalForCreateNews = () =>{
+        setCreateModalShow(true);
+    }  
     return (
         <div className="news">
             <ToastContainer />
@@ -88,7 +113,7 @@ const News = () => {
                     <div style={{ textAlign: 'right' }}>
                         <button
                             className="btn btn-outline-primary"
-                            style={{ fontSize: '20px' }}>
+                            style={{ fontSize: '20px' }} onClick={OpenModalForCreateNews}>
                             Add news
                         </button>
                     </div>
@@ -189,7 +214,7 @@ const News = () => {
             {/*  Modal for edit  */}
             <Modal show={display} onHide={() => setDisplay(false)} animation={false}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Edit News</Modal.Title>
+                        <Modal.Title>Create News</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <label>News title:</label>
@@ -222,6 +247,46 @@ const News = () => {
                             Close
                         </Button>
                         <Button variant="primary" onClick={directClose}>
+                            Apply
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/*  Modal for create  */}
+            <Modal show={createModalShow} onHide={() => setCreateModalShow(false)} animation={false}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit News</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <label>News title:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <label>Category</label>
+                        <select className="form-control" value={category} onChange={(e)=>setCategory(e.target.value)}>
+                            <option>Choose category</option>
+                            <option value="news">News</option>
+                            <option value="offer">Offer</option>
+                            <option value="travel_story">Travel story</option>
+                        </select>
+                        <div className="form-group">
+                            <label>Description:</label>
+                            <textarea className="form-control" value={description} rows="6" cols="54" onChange={(e) => setDescription(e.target.value)} />
+                        </div>
+                        <label>News Image :</label>
+                        <input
+                            type="file"
+                            name="NewsImage"
+                            onChange={(e) => setNewsImage(e.target.files[0])}
+                        />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setCreateModalShow(false)}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={createNewsFromModal}>
                             Apply
                         </Button>
                     </Modal.Footer>

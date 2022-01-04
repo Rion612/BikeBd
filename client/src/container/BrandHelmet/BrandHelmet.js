@@ -11,7 +11,7 @@ const BrandHelmet = (props) => {
     const brands = useSelector(state => state.helmetBrands.helmetBrands);
     const brand = brands.find(x => x.slug === props.match.params.slug);
     const helmet = useSelector(state=>state.helmets.helmets);
-    const helmets = helmet.filter(x=>x.brand === brand._id);
+    const helmets = helmet.filter(x=>x.brand === brand?._id);
     console.log(helmet)
     return (
         <div>

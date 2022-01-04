@@ -52,9 +52,10 @@ const Bike = () => {
                                             <td>{br?.name}</td>
                                             <td>{cat?.name}</td>
                                             <td>
-                                                <button className="btn btn-info" title="Edit" ><BiEdit /> Edit</button>
+                                                <button className='btn btn-danger'>Future scope</button>
+                                                {/* <button className="btn btn-info" title="Edit" ><BiEdit /> Edit</button>
                                                 <button className="btn btn-danger" style={{ marginLeft: "10px" }} title="Delete"><RiDeleteBin5Line />Delete</button>
-                                                <button className="btn btn-success" style={{ marginLeft: "10px" }} title="Details" ><BiDetail />View details</button>
+                                                <button className="btn btn-success" style={{ marginLeft: "10px" }} title="Details" ><BiDetail />View details</button> */}
                                             </td>
 
 

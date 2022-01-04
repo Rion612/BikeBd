@@ -76,3 +76,20 @@ exports.getAllHelmet = (req,res)=>{
         }
     })
 }
+exports.deleteHelmet = (req, res) => {
+    Helmet.findOneAndDelete({ _id: req.body._id })
+        .exec((error, result) => {
+            if (error) {
+                return res.status(400).json({
+                    message: "Something Wrong"
+                });
+            }
+            else if (result) {
+
+                return res.status(200).json(
+                    { message: "Item is deleted successfully" }
+                );
+            }
+
+        })
+}

@@ -7,18 +7,21 @@ import { getAllhelmet } from '../../Actions';
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import ReactPaginate from 'react-paginate';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "../../helpers/axios";
 const Helmet = () => {
     const [helemetbrandId, sethelemetbrandId] = useState("");
     const [name, setname] = useState('');
     const [price, setprice] = useState('');
     const [distributor, setdistributor] = useState('');
     const [helmetImage, sethelmetImage] = useState('');
+    const [state, setstate] = useState(false);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllhelmet());
 
-    }, []);
+    }, [state]);
     const helmet = useSelector(state => state.helmets);
     const hbrands = useSelector(state=>state.helmetBrands);
     const totalHelmets = helmet.helmets;
@@ -31,33 +34,46 @@ const Helmet = () => {
             <tr key={index} className="roww">
                 <td>{item.name}</td>
                 <td>
-                    <button className="btn btn-info" title="Edit" ><BiEdit /> Edit</button>
-                    <button className="btn btn-danger" style={{ marginLeft: "10px" }} title="Delete"><RiDeleteBin5Line />Delete</button>
+                    <button className="btn btn-danger" style={{ marginLeft: "10px" }} title="Delete" onClick={()=>deleteHelmet(item)}><RiDeleteBin5Line />Delete</button>
                 </td>
 
 
             </tr>
         )
     });
+    const deleteHelmet = async (item) => {
+        const delete_response = await axios.post('/delete/helmet', {_id: item._id});
+        if(delete_response.status === 200){
+            toast.success(delete_response.data.message);
+            setstate(!state);
+        }
+    }
     const changePage = ({selected})=>{
         setpageNumber(selected);
     }
-    const submitHelmetHandler =(e)=>{
+    const submitHelmetHandler = async (e)=>{
         e.preventDefault();
-
-        const helmetObj ={
-            name,
-            price,
-            distributor,
-            helmetImage,
-            brand:helemetbrandId
+        const form = new FormData();
+        form.append('name',name);
+        form.append('price',price);
+        form.append('distributor',distributor);
+        form.append('helmetImage',helmetImage);
+        form.append('brand',helemetbrandId);
+        const create_response = await axios.post('/create/helmet', form);
+        if( create_response.status === 201){
+            toast.success("Helmet created successfully.");
+            setstate(!state);
         }
-        console.log(helmetObj);
-
+        setname("");
+        setdistributor("");
+        sethelemetbrandId("");
+        setprice("");
+        sethelmetImage("")
     }
 
     return (
         <div className="helmet">
+            <ToastContainer/>
             <div className="title"><h3>Helmets</h3></div>
             <div className="chelmet">
                 <div className="coll1">
